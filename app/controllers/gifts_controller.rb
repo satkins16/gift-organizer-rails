@@ -6,7 +6,7 @@ class GiftsController < ApplicationController
 
   def create
     gift = Gift.create(gift_params)
-    
+
 
   end
 

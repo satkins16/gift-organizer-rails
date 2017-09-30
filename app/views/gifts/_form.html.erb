@@ -1,5 +1,15 @@
 <%= form_for [@event, gift] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+  <%= f.collection_select(:giver_ids, Giver.all, :id, :name) %>
   <%= f.submit 'Create Gift' %>
+<% end %>
+<br>
+<h3>Add New Gift Giver(s)</h3>
+
+<%= form_for [@event, gift] do |f| %>
+  <input name="gift[giver_ids][]"><br><br>
+  <input name="gift[giver_ids][]"><br><br>
+  <input name="gift[giver_ids][]"><br>
+  <%= f.submit 'Add' %>
 <% end %>
