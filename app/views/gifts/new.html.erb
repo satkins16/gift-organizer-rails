@@ -1,3 +1,7 @@
-<h1>New Gift</h1>
+<%= render :partial => 'events/event_header', :locals => {event: @event} %>
+
+<br>
+
+<h2>New Gift</h2>
 
 <%= render :partial => 'form', :locals => {gift: Gift.new} %>
