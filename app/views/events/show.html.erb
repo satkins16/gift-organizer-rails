@@ -2,3 +2,15 @@
 <h3><%= @event.date %></h3>
 
 <h4><%= link_to "Create Gift", new_event_gift_path(@event) %></h4>
+
+
+  <% @event.gifts.each do |gift| %>
+    <ul>
+      <li><%= gift.name %></li>
+      <% gift.givers.each do |giver| %>
+        <ul>
+          <li><%= giver.name %></li>
+        </ul>
+        <% end %>        
+    </ul>
+  <% end %>
