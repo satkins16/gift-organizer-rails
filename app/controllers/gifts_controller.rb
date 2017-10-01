@@ -7,10 +7,16 @@ class GiftsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     gift = Gift.create(gift_params)
-    giver_params.each do |id|
-      gift.givers << Giver.find(id)
+    gift.user = current_user
+    gift.save
+    params[:gift][:giver_ids].each do |id|
+      unless id.blank?
+        gift.givers << Giver.find(id)
+      end
     end
-    @event.gifts << gift.save
+    gift.save
+    @event.gifts << gift
+    @event.save
 
     redirect_to event_path(@event)
   end
