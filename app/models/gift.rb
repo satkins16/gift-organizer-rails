@@ -5,7 +5,13 @@ class Gift < ApplicationRecord
   has_many :givers, through: :gift_givers
 
   validates :name, presence: true
+  accepts_nested_attributes_for :givers
 
-
+  def givers_attributes=(giver_attributes)
+    giver_attributes.values.each do |giver_attribute|
+      giver = Giver.find_or_create_by(giver_attribute)
+      self.givers << giver
+    end
+  end
 
 end

@@ -9,12 +9,6 @@ class GiftsController < ApplicationController
     gift = Gift.create(gift_params)
     gift.user = current_user
     gift.save
-    params[:gift][:giver_ids].each do |id|
-      unless id.blank?
-        gift.givers << Giver.find(id)
-      end
-    end
-    gift.save
     @event.gifts << gift
     @event.save
 
@@ -25,11 +19,7 @@ class GiftsController < ApplicationController
 private
 
   def gift_params
-    params.require(:gift).permit(:name)
-  end
-
-  def giver_params
-    params.require(:gift).permit(:giver_ids)
+    params.require(:gift).permit(:name, giver_ids:[], givers_attributes: [:name])
   end
 
 end
