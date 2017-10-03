@@ -16,4 +16,17 @@ class Gift < ApplicationRecord
     end
   end
 
+  def thank
+    if self.thanked == 0
+      self.thanked = 1
+    else
+      flash[:notice] = "Already thanked!"
+    end
+    self.save
+  end
+
+  def thanked?
+    self.thanked == 1
+  end
+
 end
