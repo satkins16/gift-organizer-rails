@@ -9,8 +9,10 @@ class Gift < ApplicationRecord
 
   def givers_attributes=(giver_attributes)
     giver_attributes.values.each do |giver_attribute|
-      giver = Giver.find_or_create_by(giver_attribute)
-      self.givers << giver
+      unless giver_attribute[:name].blank?
+        giver = Giver.find_or_create_by(giver_attribute)
+        self.givers << giver
+      end
     end
   end
 

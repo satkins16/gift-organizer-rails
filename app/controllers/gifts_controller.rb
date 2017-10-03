@@ -14,6 +14,17 @@ class GiftsController < ApplicationController
     redirect_to event_path(current_gift_event)
   end
 
+  def edit
+    @event = current_gift_event
+    @gift = Gift.find(params[:id])
+  end
+
+  def update
+    @gift = Gift.find(params[:id])
+    @gift.update(gift_params)
+    redirect_to event_path(current_gift_event)
+  end
+
   def destroy
     gift = Gift.find(params[:id])
     gift.destroy
