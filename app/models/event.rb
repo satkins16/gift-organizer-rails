@@ -3,4 +3,5 @@ class Event < ApplicationRecord
   has_many :gifts
 
   validates :name, :date, presence: true
+
 end

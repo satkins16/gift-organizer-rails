@@ -5,14 +5,19 @@ class GiftsController < ApplicationController
   end
 
   def create
-    @event = Event.find(params[:event_id])
     gift = Gift.create(gift_params)
     gift.user = current_user
     gift.save
-    @event.gifts << gift
-    @event.save
+    current_gift_event.gifts << gift
+    current_gift_event.save
 
-    redirect_to event_path(@event)
+    redirect_to event_path(current_gift_event)
+  end
+
+  def destroy
+    gift = Gift.find(params[:id])
+    gift.destroy
+    redirect_to event_path(current_gift_event)
   end
 
 

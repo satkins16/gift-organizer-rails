@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :current_gift_event
+
+  private
+
+  def current_gift_event
+    @evnet ||= Event.find(params[:event_id])
+  end
+
   protected
 
   def configure_permitted_parameters

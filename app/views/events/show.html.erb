@@ -6,11 +6,11 @@
 
   <% @event.gifts.each do |gift| %>
     <ul>
-      <li><%= gift.name %></li>
+      <li><%= gift.name %> - <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %></li>
       <% gift.givers.each do |giver| %>
         <ul>
           <li><%= giver.name %></li>
         </ul>
-        <% end %>        
+        <% end %>
     </ul>
   <% end %>
