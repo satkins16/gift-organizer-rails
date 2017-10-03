@@ -5,12 +5,17 @@
 
 
   <% @event.gifts.each do |gift| %>
-    <ul>
-      <li><%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %></li>
-      <% gift.givers.each do |giver| %>
-        <ul>
-          <li><%= giver.name %></li>
-        </ul>
-        <% end %>
-    </ul>
+    <%= form_tag(event_gift_thank_path(@event, gift), method: :put) do %>
+      <ul>
+        <li><%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %> <% if gift.thanked? %><%= check_box_tag 'gift_id', gift.id, checked: true %><% else %><%= check_box_tag 'gift_id', gift.id %><% end %></li>
+        <% gift.givers.each do |giver| %>
+          <ul>
+            <li><%= giver.name %></li>
+          </ul>
+          <% end %>
+      </ul>
+      <% if gift == @event.gifts.last %>
+        <%= submit_tag "Update Thank You Notes" %>
+      <% end %>
+    <% end %>
   <% end %>

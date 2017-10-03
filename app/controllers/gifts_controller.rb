@@ -31,6 +31,11 @@ class GiftsController < ApplicationController
     redirect_to event_path(current_gift_event)
   end
 
+  def thank
+    Gift.where(id: params[:gift_id]).update_all(thanked: 1)
+    redirect_to event_path(current_gift_event)
+  end
+
 
 private
 
