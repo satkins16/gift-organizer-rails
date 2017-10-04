@@ -32,7 +32,13 @@ class GiftsController < ApplicationController
   end
 
   def thank
-    Gift.where(id: params[:gift_id]).update_all(thanked: 1)
+    Gift.all.each do |gift|
+      if params[:gift_id].include? gift.id
+        gift.thanked = 1
+      else
+        gift.thanked = 0
+      end
+    end
     redirect_to event_path(current_gift_event)
   end
 
