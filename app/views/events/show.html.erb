@@ -3,23 +3,18 @@
 
 <h4><%= link_to "Create Gift", new_event_gift_path(@event) %></h4>
 
-
-  <% @event.gifts.each do |gift| %>
-    <%= form_tag(event_gift_thank_path(@event, gift), method: :put) do %>
-      <ul>
-        <li>
-          <%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %>
-          <% if gift.thanked? %>
-            <%= check_box_tag 'gift_id[]', gift.id, {onchange: 'this.form.submit();', checked: true} %>
-          <% elsif %>
-            <%= check_box_tag 'gift_id[]', gift.id, {onchange: 'this.form.submit();'} %>
-            <% end %>
-          </li>
-        <% gift.givers.each do |giver| %>
-          <ul>
-            <li><%= giver.name %></li>
-          </ul>
-          <% end %>
-      </ul>
-    <% end %>
-  <% end %>
+<%= collection_check_boxes(:event, :gift_ids, @event.gifts, :id, :gift_name) do |c| %>
+  <ul>
+    <li>
+      <%= c.label do %>
+        <%= c.object.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, c.object) %> <%= link_to 'Remove', event_gift_path(@event, c.object), data: {confirm: 'Are you sure?'}, method: :delete %>
+      <% end %>
+      <%= c.check_box %>
+      <% c.object.givers.each do |giver| %>
+        <ul>
+          <li><%= giver.name %></li>
+        </ul>
+      <% end %>
+    </li>
+  </ul>
+<% end %>

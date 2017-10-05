@@ -20,4 +20,8 @@ class Gift < ApplicationRecord
     self.thanked == 1
   end
 
+  def gift_name
+    "#{self.name}"
+  end
+
 end
