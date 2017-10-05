@@ -25,6 +25,8 @@ class EventsController < ApplicationController
   def update
     event = Event.find(params[:id])
     event.update(event_params)
+    Gift.all.each do |gift|
+      if params[:event][:gift_ids].include 
     redirect_to event_path(event)
   end
 
