@@ -12,6 +12,7 @@ class Gift < ApplicationRecord
       unless giver_attribute[:name].blank?
         giver = Giver.find_or_create_by(giver_attribute)
         self.givers << giver
+        self.user.givers << giver
       end
     end
   end

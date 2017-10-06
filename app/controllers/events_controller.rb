@@ -25,8 +25,8 @@ class EventsController < ApplicationController
   def update
     event = Event.find(params[:id])
     event.update(event_params)
-    Gift.all.each do |gift|
-      if params[:event][:gift_ids].include? gift.id
+    current_user.gifts.each do |gift|
+      if params[:event][:gift_ids].map(&:to_i).include? gift.id
         gift.thanked = 1
       else
         gift.thanked = 0
@@ -35,11 +35,22 @@ class EventsController < ApplicationController
     redirect_to event_path(event)
   end
 
+  def thank
+    Gift.all.each do |gift|
+      if params[:event][:gift_ids].map(&:to_i).include? gift.id
+        gift.thanked = 1
+      else
+        gift.thanked = 0
+      end
+    end
+    redirect_to event_path(current_gift_event)
+  end
+
 
   private
 
   def event_params
-    params.require(:event).permit(:name, :date, :gift_ids)
+    params.require(:event).permit(:name, :date, :gift_ids => [])
   end
 
 end

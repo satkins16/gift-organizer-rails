@@ -1,6 +1,6 @@
 <br><%= link_to "Create Event", new_event_path %>
 
-<% @events.each do |event| %>
+<% current_user.events.each do |event| %>
   <ul>
     <li><%= link_to event.name, event_path(event) %> - <%= event.date %></li>
   </ul>

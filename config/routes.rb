@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   resources :gift_givers
   resources :events do
+    resources :givers
     resources :gifts do
-      put 'thank', to: 'gifts#thank'
     end
   end
-  resources :givers
+
+
 
 
   devise_for :users

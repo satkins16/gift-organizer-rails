@@ -4,7 +4,7 @@
 <h4><%= link_to "Create Gift", new_event_gift_path(@event) %></h4>
 
 <%= form_for @event do |f| %>
-  <%= collection_check_boxes(:event, :gift_ids, @event.gifts, :id, :gift_name) do |c| %>
+  <%= f.collection_check_boxes(:gift_ids, @event.gifts, :id, :gift_name) do |c| %>
     <ul>
       <li>
         <%= c.label do %>
@@ -25,7 +25,3 @@
   <% end %>
   <%= f.submit "Update Thank You Notes" %>
 <% end %>
-
-
-Parameters: {"utf8"=>"✓", "authenticity_token"=>"4iFvClGrdfLFb/vrbtz5cD7+r6BHom1peVtaoJIgtUcwHyQtbTLgE/DPTLapKFGkOHbtgJef+VtzABz7kTNCqA==", "event"=>{"gift_ids"=>["",
-"2", "3"]}, "commit"=>"Update Thank You Notes", "id"=>"1"}

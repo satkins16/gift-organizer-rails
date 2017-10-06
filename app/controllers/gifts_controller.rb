@@ -10,6 +10,11 @@ class GiftsController < ApplicationController
     gift.save
     current_gift_event.gifts << gift
     current_gift_event.save
+    current_user.givers.each do |giver|
+      if params[:gift][:giver_ids].include? giver.id.to_s
+        current_user.givers << giver
+      end
+    end
 
     redirect_to event_path(current_gift_event)
   end
@@ -31,22 +36,10 @@ class GiftsController < ApplicationController
     redirect_to event_path(current_gift_event)
   end
 
-  def thank
-    Gift.all.each do |gift|
-      if params[:gift_id].include? gift.id
-        gift.thanked = 1
-      else
-        gift.thanked = 0
-      end
-    end
-    redirect_to event_path(current_gift_event)
-  end
-
-
 private
 
   def gift_params
-    params.require(:gift).permit(:name, giver_ids:[], givers_attributes: [:name])
+    params.require(:gift).permit(:name, givers_attributes: [:name])
   end
 
 end

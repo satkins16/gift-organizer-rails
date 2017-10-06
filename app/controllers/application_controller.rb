@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_gift_event
-    @evnet ||= Event.find(params[:event_id])
+    @event ||= Event.find(params[:event_id])
   end
 
   protected
