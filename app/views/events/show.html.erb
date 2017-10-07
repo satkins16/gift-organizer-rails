@@ -3,7 +3,7 @@
 
 <h4><%= link_to "Create Gift", new_event_gift_path(@event) %></h4>
 
-<%= form_for @event do |f| %>
+<%= form_for @event, url: event_thank_path(@event), :method => :PATCH do |f| %>
   <%= f.collection_check_boxes(:gift_ids, @event.gifts, :id, :gift_name) do |c| %>
     <ul>
       <li>

@@ -42,6 +42,19 @@ class GiftsController < ApplicationController
     redirect_to event_path(current_gift_event)
   end
 
+  def thank
+    gift_ids = params[:event][:gift_ids]
+    Gift.all.each do |gift|
+      if gift_ids.include? gift.id.to_s
+        gift.thanked = 1
+      else
+        gift.thanked = 0
+      end
+    end
+
+    redirect_to event_path(current_gift_event)
+  end
+
   def destroy
     gift = Gift.find(params[:id])
     gift.destroy
