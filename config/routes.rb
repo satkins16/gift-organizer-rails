@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :gift_givers
+  resources :givers
   resources :events do
     patch 'thank', to: 'gifts#thank'
-    resources :givers
     resources :gifts do
     end
   end

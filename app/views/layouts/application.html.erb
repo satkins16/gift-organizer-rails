@@ -13,6 +13,7 @@
       <h1><%= current_user.name %>'s Gift Organizer</h1>
       <% if user_signed_in? %>
         <%= link_to "All Events", events_path %>
+        <%= link_to "All Givers", givers_path %>
         <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
       <% end %>
     </div>
