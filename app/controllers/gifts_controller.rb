@@ -50,6 +50,7 @@ class GiftsController < ApplicationController
       else
         gift.thanked = 0
       end
+      gift.save
     end
 
     redirect_to event_path(current_gift_event)
