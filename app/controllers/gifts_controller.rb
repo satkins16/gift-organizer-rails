@@ -2,6 +2,12 @@ class GiftsController < ApplicationController
 
   def new
     @event = Event.find(params[:event_id])
+    @givers = []
+    current_user.gifts.each do |gift|
+      gift.givers.each do |giver|
+        @givers << giver
+      end
+    end
   end
 
   def create
@@ -22,6 +28,12 @@ class GiftsController < ApplicationController
   def edit
     @event = current_gift_event
     @gift = Gift.find(params[:id])
+    @givers = []
+    current_user.gifts.each do |gift|
+      gift.givers.each do |giver|
+        @givers << giver
+      end
+    end
   end
 
   def update
