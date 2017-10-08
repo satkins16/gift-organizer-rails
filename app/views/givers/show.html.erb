@@ -1,7 +1,7 @@
 <h1>Giver: <%= @giver.name %></h1>
 <h2>Gifts:</h2>
-<% @giver.gifts.sort_by(&:name).each do |gift| %>
+<% @giver.gifts.includes(:event).order("events.date").each do |gift| %>
   <ul>
-    <li><%= link_to "#{gift.event.date} - #{gift.event.name}", event_path(gift.event) %>: <%= gift.name %></li>
+    <li><%= link_to "#{gift.event.formatted_date} - #{gift.event.name}", event_path(gift.event) %>: <%= gift.name %></li>
   </ul>
 <% end %>
