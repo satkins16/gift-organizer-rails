@@ -2,6 +2,6 @@
 
 <% current_user.events.sort_by(&:date).each do |event| %>
   <ul>
-    <li><%= link_to event.name, event_path(event) %> - <%= event.formatted_date %></li>
+    <li><%= event.formatted_date %> - <%= link_to event.name, event_path(event) %></li>
   </ul>
 <% end %>

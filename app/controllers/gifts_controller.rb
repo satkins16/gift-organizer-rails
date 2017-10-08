@@ -5,7 +5,9 @@ class GiftsController < ApplicationController
     @givers = []
     current_user.gifts.each do |gift|
       gift.givers.each do |giver|
-        @givers << giver
+        if !@givers.include? giver
+          @givers << giver
+        end
       end
     end
   end
@@ -31,7 +33,9 @@ class GiftsController < ApplicationController
     @givers = []
     current_user.gifts.each do |gift|
       gift.givers.each do |giver|
-        @givers << giver
+        if !@givers.include? giver
+          @givers << giver
+        end
       end
     end
   end

@@ -5,6 +5,6 @@ class Event < ApplicationRecord
   validates :name, :date, presence: true
 
   def formatted_date
-    self.date.strftime("%-m/%-d/%Y")
+    self.date.strftime("%-m/%-d/%y")
   end
 end
