@@ -2,7 +2,7 @@
   <%= f.label :name %><br>
   <%= f.text_field :name %><br><br>
   <h3>Assign Gift Giver(s)</h3>
-  <%= f.collection_check_boxes(:giver_ids, @givers, :id, :name) %><br>
+  <%= f.collection_check_boxes(:giver_ids, @givers.sort_by(&:name), :id, :name) %><br>
   <h3>Or Add New Gift Giver(s)</h3>
   <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
     <%= givers_fields.text_field :name %>
