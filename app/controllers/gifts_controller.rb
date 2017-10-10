@@ -48,7 +48,8 @@ class GiftsController < ApplicationController
 
   def thank
     gift_ids = params[:event][:gift_ids]
-    Gift.all.each do |gift|
+    @event = Event.find(params[:event_id])
+    @event.gifts.all.each do |gift|
       if gift_ids.include? gift.id.to_s
         gift.thanked = 1
       else

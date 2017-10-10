@@ -17,11 +17,11 @@
         <% end %>
         <% c.object.givers.each do |giver| %>
           <ul>
-            <li><%= giver.name %></li>
+            <li><%= link_to giver.name, giver_path(giver) %></li>
           </ul>
         <% end %>
       </li>
     </ul>
   <% end %>
-  <%= f.submit "Update Thank You Notes" %>
+  <%= f.submit "Save Thank You Notes" %>
 <% end %>

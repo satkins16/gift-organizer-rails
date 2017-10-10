@@ -1,4 +1,4 @@
-<h1>Giver: <%= @giver.name %></h1>
+<h1>Giver: <%= @giver.name %> - <%= link_to 'Edit', edit_giver_path %></h1>
 <h2>Gifts:</h2>
 <% @giver.gifts.includes(:event).order("events.date").each do |gift| %>
   <ul>
