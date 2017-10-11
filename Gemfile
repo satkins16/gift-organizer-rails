@@ -6,6 +6,12 @@ git_source(:github) do |repo_name|
 end
 gem 'pry-rails', group: [:development, :test]
 
+gem 'omniauth'
+
+gem 'omniauth-facebook'
+
+gem 'dotenv-rails'
+
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
