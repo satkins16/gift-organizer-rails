@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     @event ||= Event.find(params[:event_id])
   end
 
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || root_path
+  end
+
   protected
 
   def configure_permitted_parameters
