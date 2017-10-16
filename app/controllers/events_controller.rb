@@ -9,9 +9,14 @@ class EventsController < ApplicationController
 
   def create
     event = Event.create(event_params)
-    event.user = current_user
-    event.save
-    redirect_to event_path(event)
+    if event.save
+      event.user = current_user
+      event.save
+      redirect_to event_path(event)
+    else
+      @event = event
+      render :new
+    end
   end
 
   def show
@@ -24,9 +29,12 @@ class EventsController < ApplicationController
 
   def update
     event = Event.find(params[:id])
-    event.update(event_params)
-    
-    redirect_to event_path(event)
+    if event.update(event_params)
+      redirect_to event_path(event)
+    else
+      @event = event
+      render :edit
+    end
   end
 
   def thank
