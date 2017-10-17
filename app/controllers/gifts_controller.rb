@@ -14,17 +14,32 @@ class GiftsController < ApplicationController
 
   def create
     gift = Gift.create(gift_params)
-    gift.user = current_user
-    gift.save
-    current_gift_event.gifts << gift
-    current_gift_event.save
-    current_user.givers.each do |giver|
-      if params[:gift][:giver_ids].include? giver.id.to_s
-        current_user.givers << giver
+    gift.event = current_gift_event
+    if gift.valid?
+      gift.user = current_user
+      gift.save
+      current_gift_event.gifts << gift
+      current_gift_event.save
+      current_user.givers.each do |giver|
+        if params[:gift][:giver_ids].include? giver.id.to_s
+          current_user.givers << giver
+        end
       end
-    end
 
-    redirect_to event_path(current_gift_event)
+      redirect_to event_path(current_gift_event)
+    else
+      @event = Event.find(params[:event_id])
+      @gift = gift
+      @givers = []
+      current_user.gifts.each do |gift|
+        gift.givers.each do |giver|
+          if !@givers.include? giver
+            @givers << giver
+          end
+        end
+      end
+      render :new
+    end
   end
 
   def edit
@@ -41,9 +56,22 @@ class GiftsController < ApplicationController
   end
 
   def update
-    @gift = Gift.find(params[:id])
-    @gift.update(gift_params)
-    redirect_to event_path(current_gift_event)
+    gift = Gift.find(params[:id])
+    if gift.update(gift_params)
+      redirect_to event_path(current_gift_event)
+    else
+      @event = current_gift_event
+      @gift = gift
+      @givers = []
+      current_user.gifts.each do |gift|
+        gift.givers.each do |giver|
+          if !@givers.include? giver
+            @givers << giver
+          end
+        end
+      end
+      render :edit
+    end
   end
 
   def thank
