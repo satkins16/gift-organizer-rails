@@ -1,24 +1,21 @@
-# README
+# Rails Gift Organizer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The Gift Organizer app gives the user the opportunity to create an event, populate that event with gifts, and assign givers to each of those gifts. The event will become a checklist of gifts in which the user can check off each gift after a thank you note has been sent out to the gift's respective givers.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+To use this code, you should first copy it to your computer via
 
-* System dependencies
+    git clone https://github.com/satkins16/gift-organizer
 
-* Configuration
+## Usage
 
-* Database creation
+To use this app, just clone, run bundle install and then run shotgun.
 
-* Database initialization
+## License
 
-* How to run the test suite
+Everything in this repo is MIT License unless otherwise specified. Open license.txt to view license.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Contributing
 
-* Deployment instructions
-
-* ...
+To contribute to Gift Organizer, open contributing.md for instructions.
