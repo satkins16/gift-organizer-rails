@@ -7,4 +7,5 @@ class Event < ApplicationRecord
   def formatted_date
     self.date.strftime("%-m/%-d/%y")
   end
+
 end

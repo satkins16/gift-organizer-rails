@@ -20,15 +20,15 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = current_event
   end
 
   def edit
-    @event = Event.find(params[:id])
+    @event = current_event
   end
 
   def update
-    event = Event.find(params[:id])
+    event = current_event
     if event.update(event_params)
       redirect_to event_path(event)
     else

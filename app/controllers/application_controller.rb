@@ -11,6 +11,25 @@ class ApplicationController < ActionController::Base
     @event ||= Event.find(params[:event_id])
   end
 
+  def current_event
+    @event ||= Event.find(params[:id])
+  end
+
+
+
+  def current_user_givers
+    @givers = []
+    current_user.gifts.each do |gift|
+      gift.givers.each do |giver|
+        if !@givers.include? giver
+          @givers << giver
+        end
+      end
+    end
+
+    @givers
+  end
+
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || root_path
   end
