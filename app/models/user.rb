@@ -14,5 +14,9 @@ class User < ApplicationRecord
     end
   end
 
+  def self.all_formatted
+    User.all.sort_by(&:name)
+  end
+
 
 end

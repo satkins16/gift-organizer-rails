@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_gift_event
 
+  def users_index
+
+    @users = User.all_formatted
+    render applications: 'users_index'
+    
+  end
+
   private
 
   def current_gift_event

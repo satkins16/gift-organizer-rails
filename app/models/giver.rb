@@ -5,12 +5,4 @@ class Giver < ApplicationRecord
 
   validates :name, presence: true
 
-  def self.quantity
-    self.all.count
-  end
-
-  def gift_quantity
-    self.gifts.count
-  end
-
 end

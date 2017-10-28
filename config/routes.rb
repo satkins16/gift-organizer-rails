@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'users', to: 'application#users_index'
+
 
 
 
