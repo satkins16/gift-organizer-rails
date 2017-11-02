@@ -18,5 +18,9 @@ class User < ApplicationRecord
     User.all.sort_by(&:name)
   end
 
+  def admin?
+    self.role == 1
+  end
+
 
 end
