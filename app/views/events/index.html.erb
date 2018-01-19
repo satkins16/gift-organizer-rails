@@ -1,6 +1,8 @@
 <br>
 <button id="js-new-event-button">Create Event</button>
-<!--<%= render :partial => 'form', :locals => {event: Event.new} %>-->
+
+<br><br>
+
 <div id="js-event-form"></div>
 
 <% current_user.events.sort_by(&:date).each do |event| %>
@@ -10,8 +12,18 @@
 <% end %>
 
 <script type="text/javascript" charset="utf-8">
-  $('#js-new-event-button').on("click", function(e) {
-    e.preventDefault()
-    $('#js-event-form').get('/app/views/events/_form.html.erb #new-event-form')
+  $('#js-new-event-button').on("click", function(event) {
+    event.preventDefault()
+    $('#js-event-form').load('/events/new #new-event-form')
   })
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+
+      event.preventDefault();
+      alert("we r hack3rz");
+    });
+  });
 </script>
