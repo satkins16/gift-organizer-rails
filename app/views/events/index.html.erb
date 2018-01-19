@@ -1,7 +1,17 @@
-<br><%= link_to "Create Event", new_event_path %>
+<br>
+<button id="js-new-event-button">Create Event</button>
+<!--<%= render :partial => 'form', :locals => {event: Event.new} %>-->
+<div id="js-event-form"></div>
 
 <% current_user.events.sort_by(&:date).each do |event| %>
   <ul>
     <li><%= event.formatted_date %> - <%= link_to event.name, event_path(event) %></li>
   </ul>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $('#js-new-event-button').on("click", function(e) {
+    e.preventDefault()
+    $('#js-event-form').get('/app/views/events/_form.html.erb #new-event-form')
+  })
+</script>
