@@ -1,7 +1,11 @@
 <h1><%= @event.name %></h1>
 <h3><%= @event.formatted_date %> - <%= link_to 'Edit', edit_event_path(@event) %></h3>
 
-<h4><%= link_to "Create Gift", new_event_gift_path(@event) %></h4>
+<button id="js-new-gift-button">Create Gift</button>
+
+<br><br>
+
+<div id="js-gift-form-div"></div>
 
 <%= form_for @event, url: event_thank_path(@event), :method => :PATCH do |f| %>
   <%= f.collection_check_boxes(:gift_ids, @event.gifts, :id, :gift_name) do |c| %>
@@ -25,3 +29,10 @@
   <% end %>
   <%= f.submit "Save Thank You Notes" %>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $('#js-new-gift-button').on("click", function(event) {
+    event.preventDefault()
+    $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new #js-new-gift-form')
+  })
+</script>
