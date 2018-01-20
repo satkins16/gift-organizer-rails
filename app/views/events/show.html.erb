@@ -36,3 +36,13 @@
     $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new #js-new-gift-form')
   })
 </script>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('#js-gift-form-div').submit(function(event) {
+      //prevent form from submitting the default way
+      event.preventDefault();
+      alert("we r hack3rz");
+    });
+  });
+</script>
