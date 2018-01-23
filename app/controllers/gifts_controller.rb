@@ -1,5 +1,8 @@
 class GiftsController < ApplicationController
 
+  def index
+  end
+
   def new
     @event = current_gift_event
     @givers = current_user_givers

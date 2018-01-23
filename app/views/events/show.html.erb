@@ -5,7 +5,7 @@
 
 <button id="js-new-gift-button">Create Gift</button>
 
-<br><br>
+<br>
 
 <div id="js-gift-form-div"></div>
 
@@ -41,7 +41,7 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
-    $('#js-gift-form-div').submit(function(event) {
+    $('.button').click(function(event) {
       //prevent form from submitting the default way
       event.preventDefault();
       debugger
