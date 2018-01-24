@@ -1,15 +1,14 @@
 $(function () {
-  $('#new_gift').submit(function(event) {
+  $('#js-gift-form-div').submit(function(event) {
     //prevent form from submitting the default way
     event.preventDefault();
-    debugger
 
-    //var values = $(this).serialize();
+    var values = $("#new_gift", this).serialize();
 
-    //var posting = $.post('/posts', values);
+    var posting = $.post(`event/${event.id}/gifts`, values);
 
-    //posting.done(function(data) {
-      // TODO: handle response
-    //});
+    posting.done(function(data) {
+      TODO: handle response
+    });
   });
 });
