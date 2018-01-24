@@ -9,32 +9,41 @@
 
 <div id="js-gift-form-div"></div>
 
-<%= form_for @event, url: event_thank_path(@event), :method => :PATCH do |f| %>
-  <%= f.collection_check_boxes(:gift_ids, @event.gifts, :id, :gift_name) do |c| %>
-    <ul>
-      <li>
-        <%= c.label do %>
-          <%= c.object.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, c.object) %> <%= link_to 'Remove', event_gift_path(@event, c.object), data: {confirm: 'Are you sure?'}, method: :delete %>
-        <% end %>
-        <% if c.object.thanked? %>
-          <%= c.check_box(checked: true) %>
-        <% else %>
-          <%= c.check_box(checked: false) %>
-        <% end %>
-        <% c.object.givers.each do |giver| %>
-          <ul>
-            <li><%= link_to giver.name, giver_path(giver) %></li>
-          </ul>
-        <% end %>
-      </li>
-    </ul>
-  <% end %>
-  <%= f.submit "Save Thank You Notes" %>
+
+<% @event.gifts.each do |gift| %>
+  <ul>
+    <li>
+      <%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %>
+      <% gift.givers.each do |giver| %>
+        <ul>
+          <li><%= link_to giver.name, giver_path(giver) %></li>
+        </ul>
+      <% end %>
+    </li>
+  </ul>
 <% end %>
+
 
 <script type="text/javascript" charset="utf-8">
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
     $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new #new_gift')
   })
+</script>
+
+<script>
+  $(function () {
+    $('#js-gift-form-div').submit(function(event) {
+      event.preventDefault();
+
+      var values = $("#new_gift", this).serialize();
+
+      var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
+
+      posting.done(function(data) {
+        var gift = data
+        debugger
+      });
+    });
+  });
 </script>

@@ -9,12 +9,12 @@ class GiftsController < ApplicationController
   end
 
   def create
-    gift = Gift.create(gift_params)
-    gift.event = current_gift_event
-    if gift.valid?
-      gift.user = current_user
-      gift.save
-      current_gift_event.gifts << gift
+    @gift = Gift.create(gift_params)
+    @gift.event = current_gift_event
+    if @gift.valid?
+      @gift.user = current_user
+      @gift.save
+      current_gift_event.gifts << @gift
       current_gift_event.save
       current_user.givers.each do |giver|
         if params[:gift][:giver_ids].include? giver.id.to_s
@@ -22,7 +22,7 @@ class GiftsController < ApplicationController
         end
       end
 
-      redirect_to event_path(current_gift_event)
+      render json: @gift, status: 201
     else
       @event = current_gift_event
       @gift = gift
