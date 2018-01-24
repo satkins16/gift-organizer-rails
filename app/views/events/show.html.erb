@@ -3,7 +3,7 @@
 <h1><%= @event.name %></h1>
 <h3><%= @event.formatted_date %> - <%= link_to 'Edit', edit_event_path(@event) %></h3>
 
-<button id="js-new-gift-button">Create Gift</button>
+<button id="js-new-gift-button">Create Gift</button><br>
 
 <br>
 
@@ -22,7 +22,11 @@
     </li>
   </ul>
 <% end %>
-
+<div id="giftResult">
+  <ul>
+    <li id="giftName"></li>
+  </ul>
+</div>
 
 <script type="text/javascript" charset="utf-8">
   $('#js-new-gift-button').on("click", function(event) {
@@ -42,7 +46,8 @@
 
       posting.done(function(data) {
         var gift = data
-        debugger
+        $("#giftName").text(gift["name"])
+        $("#js-gift-form-div").html("")
       });
     });
   });
