@@ -12,7 +12,7 @@
   <% @event.gifts.sort_by(&:name).each do |gift| %>
     <ul>
       <li>
-        <%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %>
+        <%= gift.name %> - <a href="#" id="editLink">Edit</a> <a href="#" id="removeLink">Remove</a>
         <% gift.givers.each do |giver| %>
           <ul>
             <li><%= link_to giver.name, giver_path(giver) %></li>
@@ -58,3 +58,4 @@
     });
   });
 </script>
+<%-#link_to 'Edit', "#" %> <%-#link_to 'Remove', "#", data: {confirm: 'Are you sure?'}, method: :delete %>
