@@ -1,11 +1,10 @@
 <% if @gift %>
   <% if @gift.errors.any? %>
     <div id="error_explanation">
-      <h2>
+      <h3>
         <%= pluralize(@gift.errors.count, "error") %>
         prohibited this post from being saved:
-      </h2>
-
+      </h3>
       <ul>
       <% @gift.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -15,11 +14,10 @@
   <% end %>
 <% end %>
 
-<div id="js-new-gift-form">
-  <br>
+<div id="js-new-gift-form"><br>
   <%= form_for [@event, gift] do |f| %>
     <%= f.label :name %><br>
-    <%= f.text_field :name %><br><br>
+    <%= f.text_field :name %><br>
     <h3>Assign Gift Giver(s)</h3>
     <%= f.collection_check_boxes(:giver_ids, @givers.sort_by(&:name), :id, :name) %><br>
     <h3>Or Add New Gift Giver(s)</h3>

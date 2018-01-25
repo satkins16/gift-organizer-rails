@@ -2,11 +2,10 @@
   <% if @event %>
     <% if @event.errors.any? %>
       <div id="error_explanation">
-        <h2>
+        <h3>
           <%= pluralize(@event.errors.count, "error") %>
           prohibited this post from being saved:
-        </h2>
-
+        </h3>
         <ul>
         <% @event.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
