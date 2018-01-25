@@ -26,7 +26,6 @@ class GiftsController < ApplicationController
       render json: @gift, status: 201
     else
       @event = current_gift_event
-      @gift = gift
       @givers = current_user_givers
       render :new
     end

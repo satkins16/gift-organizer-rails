@@ -7,6 +7,7 @@
 
 <br>
 
+<div id="error_div"></div>
 <div id="js-gift-form-div"></div>
 
 <div id="giftList">
@@ -39,22 +40,23 @@
 
       var values = $("#new_gift", this).serialize();
 
-      $.post(`/events/<%= @event.id %>/gifts`, values);
+      var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
 
-      $.get('/events/<%= @event.id %>', function(data) {
-        $('#giftList').html("")
-        $('#giftList').html($(data).filter('#giftList'))
-        $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+      posting.done(function(data) {
+        if (typeof data === "string") {
+          $('#error_div').html($(data).filter('#error_explanation'))
+          $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
+        }
+        if (typeof data === "object") {
+          $('#error_div').html("")
+          $.get('/events/<%= @event.id %>', function(data) {
+            $('#giftList').html("")
+            $('#giftList').html($(data).filter('#giftList'))
+            $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+          })
+        }
+        $("js-gift-form-div").html("")
       })
-
-
-      //posting.done(function(data) {
-        //var gift = data
-
-        //$("#giftName").text(gift["name"])
-        //$("#js-gift-form-div").html("")
-      //});
-      $("js-gift-form-div").html("")
     });
   });
 </script>
