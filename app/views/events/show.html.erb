@@ -9,19 +9,20 @@
 
 <div id="js-gift-form-div"></div>
 
-
-<% @event.gifts.sort_by(&:name).each do |gift| %>
-  <ul id="giftList">
-    <li>
-      <%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %>
-      <% gift.givers.each do |giver| %>
-        <ul>
-          <li><%= link_to giver.name, giver_path(giver) %></li>
-        </ul>
-      <% end %>
-    </li>
-  </ul>
-<% end %>
+<div id="giftList">
+  <% @event.gifts.sort_by(&:name).each do |gift| %>
+    <ul>
+      <li>
+        <%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %>
+        <% gift.givers.each do |giver| %>
+          <ul>
+            <li><%= link_to giver.name, giver_path(giver) %></li>
+          </ul>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+</div>
 
 
 <script type="text/javascript" charset="utf-8">
@@ -40,13 +41,15 @@
 
       var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
 
-      posting.done(function(data) {
-        var gift = data
-        $("#giftList").append('<li id="newListItem"></li>')
-        $("#newListItem").text(gift["name"])
+      $.get('/events/<%= @event.id %>', function(data) {
+        $('#giftList').html($(data).filter('#giftList'))
+      })
+      //posting.done(function(data) {
+        //var gift = data
+
         //$("#giftName").text(gift["name"])
         //$("#js-gift-form-div").html("")
-      });
+      //});
     });
   });
 </script>
