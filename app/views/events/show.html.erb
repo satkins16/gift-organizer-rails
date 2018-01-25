@@ -28,7 +28,7 @@
 <script type="text/javascript" charset="utf-8">
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
-    $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new #new_gift')
+    $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
   })
 </script>
 
@@ -39,17 +39,22 @@
 
       var values = $("#new_gift", this).serialize();
 
-      var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
+      $.post(`/events/<%= @event.id %>/gifts`, values);
 
       $.get('/events/<%= @event.id %>', function(data) {
+        $('#giftList').html("")
         $('#giftList').html($(data).filter('#giftList'))
+        $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
       })
+
+
       //posting.done(function(data) {
         //var gift = data
 
         //$("#giftName").text(gift["name"])
         //$("#js-gift-form-div").html("")
       //});
+      $("js-gift-form-div").html("")
     });
   });
 </script>

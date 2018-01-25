@@ -1,19 +1,21 @@
-<% if @event %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@event.errors.count, "error") %>
-        prohibited this post from being saved:
-      </h2>
+<div id="new_gift_error>">
+  <% if @event %>
+    <% if @event.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@event.errors.count, "error") %>
+          prohibited this post from being saved:
+        </h2>
 
-      <ul>
-      <% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+        <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 
 <%= form_for event do |f| %>
