@@ -12,12 +12,14 @@
   <% @event.gifts.sort_by(&:name).each do |gift| %>
     <ul>
       <li>
-        <%= gift.name %> - <a href="#" id="editLink">Edit</a> <a href="#" id="removeLink">Remove</a>
-        <% gift.givers.each do |giver| %>
-          <ul>
-            <li><%= link_to giver.name, giver_path(giver) %></li>
-          </ul>
-        <% end %>
+        <div id="gift-element-<%= gift.id %>">
+          <%= gift.name %> - <a href="#" id="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" id="removeLink" data-id="<%= gift.id %>">Remove</a>
+          <% gift.givers.each do |giver| %>
+            <ul>
+              <li><%= link_to giver.name, giver_path(giver) %></li>
+            </ul>
+          <% end %>
+        </div>
       </li>
     </ul>
   <% end %>
@@ -57,5 +59,17 @@
       })
     });
   });
+</script>
+
+<script>
+  $(function () {
+    $('#editLink').on("click", function(event) {
+      event.preventDefault();
+      debugger
+      var id = $(this).data("id");
+      debugger
+      $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
+    })
+  })
 </script>
 <%-#link_to 'Edit', "#" %> <%-#link_to 'Remove', "#", data: {confirm: 'Are you sure?'}, method: :delete %>
