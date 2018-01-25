@@ -3,7 +3,6 @@ class Gift < ApplicationRecord
   belongs_to :user, optional: true
   has_many :gift_givers
   has_many :givers, through: :gift_givers
-
   validates :name, presence: true
 
   def givers_attributes=(giver_attributes)

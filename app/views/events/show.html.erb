@@ -10,7 +10,7 @@
 <div id="js-gift-form-div"></div>
 
 
-<% @event.gifts.each do |gift| %>
+<% @event.gifts.sort_by(&:name).each do |gift| %>
   <ul id="giftList">
     <li>
       <%= gift.name %> - <%= link_to 'Edit', edit_event_gift_path(@event, gift) %> <%= link_to 'Remove', event_gift_path(@event, gift), data: {confirm: 'Are you sure?'}, method: :delete %>
@@ -42,7 +42,8 @@
 
       posting.done(function(data) {
         var gift = data
-        $("#giftList").append('<li>'+$(gift["name"])+'</li>')
+        $("#giftList").append('<li id="newListItem"></li>')
+        $("#newListItem").text(gift["name"])
         //$("#giftName").text(gift["name"])
         //$("#js-gift-form-div").html("")
       });
