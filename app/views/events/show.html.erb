@@ -12,7 +12,7 @@
   <ul>
     <% @event.gifts.sort_by(&:name).each do |gift| %>
       <li>
-        <div id="gift-element-<%= gift.id %>">
+        <div class="gift-div" id="gift-element-<%= gift.id %>">
           <%= gift.name %> - <a href="#" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
           <% gift.givers.each do |giver| %>
             <ul>
@@ -39,7 +39,7 @@
       event.preventDefault();
 
       var values = $("#new_gift", this).serialize();
-
+      
       var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
 
       posting.done(function(data) {
@@ -70,4 +70,15 @@
     })
   })
 </script>
-<%-#link_to 'Edit', "#" %> <%-#link_to 'Remove', "#", data: {confirm: 'Are you sure?'}, method: :delete %>
+
+<script>
+  $(function () {
+    $('.gift-div').submit(function() {
+      event.preventDefault()
+      debugger
+      var values = $("#edit_gift", this).serialize();
+      var posting = $.post(`/events/<%= @event.id %>/gifts/`, values);
+    })
+  })
+</script>
+<%-#link_to 'Remove', "#", data: {confirm: 'Are you sure?'}, method: :delete %>
