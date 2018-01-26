@@ -14,9 +14,8 @@
   <% end %>
 <% end %>
 
-<div id="js-new-gift-form"><br>
+<div id="js-new-gift-form">
   <%= form_for [@event, gift] do |f| %>
-    <%= f.label :name %><br>
     <%= f.text_field :name %><br>
     <h3>Assign Gift Giver(s)</h3>
     <%= f.collection_check_boxes(:giver_ids, @givers.sort_by(&:name), :id, :name) %><br>

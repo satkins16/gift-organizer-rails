@@ -9,11 +9,11 @@
 <div id="js-gift-form-div"></div>
 
 <div id="giftList">
-  <% @event.gifts.sort_by(&:name).each do |gift| %>
-    <ul>
+  <ul>
+    <% @event.gifts.sort_by(&:name).each do |gift| %>
       <li>
         <div id="gift-element-<%= gift.id %>">
-          <%= gift.name %> - <a href="#" id="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" id="removeLink" data-id="<%= gift.id %>">Remove</a>
+          <%= gift.name %> - <a href="#" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
           <% gift.givers.each do |giver| %>
             <ul>
               <li><%= link_to giver.name, giver_path(giver) %></li>
@@ -21,8 +21,8 @@
           <% end %>
         </div>
       </li>
-    </ul>
-  <% end %>
+    <% end %>
+  </ul>
 </div>
 
 
@@ -63,11 +63,9 @@
 
 <script>
   $(function () {
-    $('#editLink').on("click", function(event) {
+    $('.editLink').on("click", function(event) {
       event.preventDefault();
-      debugger
       var id = $(this).data("id");
-      debugger
       $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
     })
   })

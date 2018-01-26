@@ -1,5 +1,5 @@
 class GiftsController < ApplicationController
-  layout false, only: [:new, :show]
+  layout false, only: [:new, :show, :edit]
 
   def index
   end
