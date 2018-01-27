@@ -5,6 +5,7 @@
 
 <button id="js-new-gift-button">Create Gift</button><br>
 
+<div id="break_div"></div>
 <div id="error_div"></div>
 <div id="js-gift-form-div"></div>
 
@@ -31,6 +32,7 @@
 <script type="text/javascript" charset="utf-8">
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
+    $('#break_div').html('<br>')
     $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
   })
 </script>
@@ -53,7 +55,7 @@
         if (typeof data === "object") {
           $('#error_div').html("")
           $.get('/events/<%= @event.id %>', function(data) {
-            $('#giftList').html("")
+            $('#break_div').html("")
             $('#giftList').html($(data).filter('#giftList'))
             $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
           })
@@ -76,30 +78,20 @@
 
 <script>
   $(function () {
-    $('.gift-div').submit(function() {
+    $('.removeLink').on("click", function(event) {
       event.preventDefault()
-
-      var id = $(this).data("id");
-      var values = $(".edit_gift", this).serialize();
-      var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
-
-      posting.done(function(data) {
-        if (typeof data === "string") {
-          $('#error_div_' + id).html($(data).filter('#error_explanation'))
-          $('#break_div_' + id).html('<br>')
-          $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
-        }
-        if (typeof data === "object") {
-          $('#error_div_' + id).html("")
-          $('#break_div_' + id).html("")
-          $.get('/events/<%= @event.id %>', function(data) {
-            $('#giftList').html("")
-            $('#giftList').html($(data).filter('#giftList'))
-            $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
-          })
-        }
+      var id = $(this).data("id")
+      $.ajax({
+        url: "/events/<%= @event.id %>/gifts/" + id,
+        method: "DELETE",
+        data: id
+      }).done(function() {
+        $.get('/events/<%= @event.id %>', function(data) {
+          $('#giftList').html($(data).filter('#giftList'))
+        })
       })
     })
   })
 </script>
+
 <%-#link_to 'Remove', "#", data: {confirm: 'Are you sure?'}, method: :delete %>

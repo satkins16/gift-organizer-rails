@@ -23,7 +23,7 @@
     <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
       <%= givers_fields.text_field :name %>
     <% end %><br><br>
-    <%= f.submit 'Submit' %>
+    <%= f.submit 'Submit' %><button>Cancel</button>
   <% end %>
 </div>
 <br>

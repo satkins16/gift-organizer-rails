@@ -66,7 +66,6 @@ class GiftsController < ApplicationController
   def destroy
     gift = Gift.find(params[:id])
     gift.destroy
-    redirect_to event_path(current_gift_event)
   end
 
 private
