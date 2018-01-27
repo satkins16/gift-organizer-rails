@@ -89,6 +89,15 @@
           $('#break_div_' + id).html('<br>')
           $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
         }
+        if (typeof data === "object") {
+          $('#error_div_' + id).html("")
+          $('#break_div_' + id).html("")
+          $.get('/events/<%= @event.id %>', function(data) {
+            $('#giftList').html("")
+            $('#giftList').html($(data).filter('#giftList'))
+            $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+          })
+        }
       })
     })
   })
