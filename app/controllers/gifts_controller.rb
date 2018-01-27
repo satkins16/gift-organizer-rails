@@ -38,12 +38,11 @@ class GiftsController < ApplicationController
   end
 
   def update
-    gift = Gift.find(params[:id])
-    if gift.update(gift_params)
-      redirect_to event_path(current_gift_event)
+    @gift = Gift.find(params[:id])
+    if @gift.update(gift_params)
+      render json: @gift, status: 201
     else
       @event = current_gift_event
-      @gift = gift
       @givers = current_user_givers
       render :edit
     end

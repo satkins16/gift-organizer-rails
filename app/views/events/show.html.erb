@@ -12,6 +12,8 @@
   <ul>
     <% @event.gifts.sort_by(&:name).each do |gift| %>
       <li>
+        <div id="error_div_<%= gift.id %>"></div>
+        <div id="break_div_<%= gift.id %>"></div>
         <div class="gift-div" id="gift-element-<%= gift.id %>" data-id="<%= gift.id %>">
           <%= gift.name %> - <a href="#" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
           <% gift.givers.each do |giver| %>
@@ -43,6 +45,7 @@
       var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
 
       posting.done(function(data) {
+
         if (typeof data === "string") {
           $('#error_div').html($(data).filter('#error_explanation'))
           $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
@@ -81,7 +84,11 @@
       var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
 
       posting.done(function(data) {
-        debugger
+        if (typeof data === "string") {
+          $('#error_div_' + id).html($(data).filter('#error_explanation'))
+          $('#break_div_' + id).html('<br>')
+          $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
+        }
       })
     })
   })
