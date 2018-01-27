@@ -1,0 +1,2 @@
+-Givers showing up by events
+-In All Givers, organize the same giver in the same event alphabetically
