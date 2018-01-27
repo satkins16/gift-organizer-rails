@@ -3,7 +3,7 @@
 <h1><%= @event.name %></h1>
 <h3><%= @event.formatted_date %> - <%= link_to 'Edit', edit_event_path(@event) %></h3>
 
-<button id="js-new-gift-button">Create Gift</button><br>
+<button id="js-new-gift-button">Create Gift</button><br><div id="cancel_gift"></div>
 
 <div id="break_div"></div>
 <div id="error_div"></div>
@@ -33,7 +33,18 @@
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
     $('#break_div').html('<br>')
+    $('#cancel_gift').html('<br><button id="cancel_gift_button">Cancel</button>')
     $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
+  })
+</script>
+
+<script>
+  $(document).on('click', '#cancel_gift_button', function(event) {
+    event.preventDefault()
+    $('#cancel_gift').html("")
+    $('#error_div').html("")
+    $('#break_div').html("")
+    $('#js-gift-form-div').html("")
   })
 </script>
 
