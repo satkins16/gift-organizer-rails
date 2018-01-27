@@ -92,17 +92,19 @@
     $('.removeLink').on("click", function(event) {
       event.preventDefault()
       var id = $(this).data("id")
-      $.ajax({
-        url: "/events/<%= @event.id %>/gifts/" + id,
-        method: "DELETE",
-        data: id
-      }).done(function() {
-        $.get('/events/<%= @event.id %>', function(data) {
-          $('#giftList').html($(data).filter('#giftList'))
+      var confirmation = confirm("Are you sure you want to delete?")
+
+      if (confirmation) {
+        $.ajax({
+          url: "/events/<%= @event.id %>/gifts/" + id,
+          method: "DELETE",
+          data: id
+        }).done(function() {
+          $.get('/events/<%= @event.id %>', function(data) {
+            $('#giftList').html($(data).filter('#giftList'))
+          })
         })
-      })
+      }
     })
   })
 </script>
-
-<%-#link_to 'Remove', "#", data: {confirm: 'Are you sure?'}, method: :delete %>
