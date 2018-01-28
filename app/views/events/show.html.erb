@@ -43,48 +43,44 @@
 </script>
 
 <script>
-  $(function () {
-    $('#js-gift-form-div').submit(function(event) {
-      event.preventDefault();
+  $('#js-gift-form-div').submit(function(event) {
+    event.preventDefault();
 
-      var values = $("#new_gift", this).serialize();
+    var values = $("#new_gift", this).serialize();
 
-      var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
+    var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
 
-      posting.done(function(data) {
+    posting.done(function(data) {
 
-        if (typeof data === "string") {
-          $('#error_div').html($(data).filter('#error_explanation'))
-          $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
-        }
-        if (typeof data === "object") {
-          $('#error_div').html("")
-          $.get('/events/<%= @event.id %>', function(data) {
-            $('#break_div').html("")
-            $('#giftList').html($(data).filter('#giftList'))
-            $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
-          })
-        }
-        $("js-gift-form-div").html("")
-      })
-    });
+      if (typeof data === "string") {
+        $('#error_div').html($(data).filter('#error_explanation'))
+        $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
+      }
+      if (typeof data === "object") {
+        $('#error_div').html("")
+        $.get('/events/<%= @event.id %>', function(data) {
+          $('#break_div').html("")
+          $('#giftList').html($(data).filter('#giftList'))
+          $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+        })
+      }
+      $("js-gift-form-div").html("")
+    })
   });
 </script>
 
 <script>
-  $(function () {
-    $('.editLink').on("click", function(event) {
-      event.preventDefault();
-      var id = $(this).data("id");
-      $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit', function() {
-        $('#name_h3').html("")
-        $('#gift_form_break').html("<br>")
-        $('#cancel_edit_gift_div').html("<button id='cancel_edit_gift_button'>Cancel</div>")
-        $('#cancel_gift').html("")
-        $('#error_div').html("")
-        $('#break_div').html("")
-        $('#js-gift-form-div').html("")
-      })
+  $('.editLink').on("click", function(event) {
+    event.preventDefault();
+    var id = $(this).data("id");
+    $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit', function() {
+      $('#name_h3').html("")
+      $('#gift_form_break').html("<br>")
+      $('#cancel_edit_gift_div').html("<button id='cancel_edit_gift_button'>Cancel</div>")
+      $('#cancel_gift').html("")
+      $('#error_div').html("")
+      $('#break_div').html("")
+      $('#js-gift-form-div').html("")
     })
   })
 </script>
@@ -103,50 +99,46 @@
 </script>
 
 <script>
-  $(function () {
-    $('.gift-div').submit(function() {
-      event.preventDefault()
-      var id = $(this).data("id");
-      var values = $(".edit_gift", this).serialize();
-      var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
-      posting.done(function(data) {
-        if (typeof data === "string") {
-          $('#error_div_' + id).html($(data).filter('#error_explanation'))
-          $('#break_div_' + id).html('<br>')
-          $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
-        }
-        if (typeof data === "object") {
-          $('#error_div_' + id).html("")
-          $('#break_div_' + id).html("")
-          $.get('/events/<%= @event.id %>', function(data) {
-            $('#giftList').html("")
-            $('#giftList').html($(data).filter('#giftList'))
-            $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
-          })
-        }
-      })
+  $('.gift-div').submit(function() {
+    event.preventDefault()
+    var id = $(this).data("id");
+    var values = $(".edit_gift", this).serialize();
+    var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
+    posting.done(function(data) {
+      if (typeof data === "string") {
+        $('#error_div_' + id).html($(data).filter('#error_explanation'))
+        $('#break_div_' + id).html('<br>')
+        $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
+      }
+      if (typeof data === "object") {
+        $('#error_div_' + id).html("")
+        $('#break_div_' + id).html("")
+        $.get('/events/<%= @event.id %>', function(data) {
+          $('#giftList').html("")
+          $('#giftList').html($(data).filter('#giftList'))
+          $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+        })
+      }
     })
   })
 </script>
 
 <script>
-  $(function () {
-    $('.removeLink').on("click", function(event) {
-      event.preventDefault()
-      var id = $(this).data("id")
-      var confirmation = confirm("Are you sure you want to delete?")
+  $('.removeLink').on("click", function(event) {
+    event.preventDefault()
+    var id = $(this).data("id")
+    var confirmation = confirm("Are you sure you want to delete?")
 
-      if (confirmation) {
-        $.ajax({
-          url: "/events/<%= @event.id %>/gifts/" + id,
-          method: "DELETE",
-          data: id
-        }).done(function() {
-          $.get('/events/<%= @event.id %>', function(data) {
-            $('#giftList').html($(data).filter('#giftList'))
-          })
+    if (confirmation) {
+      $.ajax({
+        url: "/events/<%= @event.id %>/gifts/" + id,
+        method: "DELETE",
+        data: id
+      }).done(function() {
+        $.get('/events/<%= @event.id %>', function(data) {
+          $('#giftList').html($(data).filter('#giftList'))
         })
-      }
-    })
+      })
+    }
   })
 </script>
