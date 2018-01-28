@@ -3,7 +3,7 @@
 <h1><%= @event.name %></h1>
 <h3><%= @event.formatted_date %> - <%= link_to 'Edit', edit_event_path(@event) %></h3>
 
-<button id="js-new-gift-button">Create Gift</button><br><div id="cancel_gift"></div>
+<button id="js-new-gift-button">Create Gift</button><br>
 
 <div id="break_div"></div>
 <div id="error_div"></div>
@@ -32,19 +32,13 @@
 <script type="text/javascript" charset="utf-8">
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
-    $('#break_div').html('<br>')
     $('#cancel_gift').html('<br><button id="cancel_gift_button">Cancel</button>')
-    $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new')
-  })
-</script>
-
-<script>
-  $(document).on('click', '#cancel_gift_button', function(event) {
-    event.preventDefault()
-    $('#cancel_gift').html("")
-    $('#error_div').html("")
-    $('#break_div').html("")
-    $('#js-gift-form-div').html("")
+    $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new', function() {
+      $('#break_div').html('<br>')
+    })
+    $.get('/events/<%= @event.id %>', function(data) {
+      $('#giftList').html($(data).filter('#giftList'))
+    })
   })
 </script>
 
@@ -82,7 +76,55 @@
     $('.editLink').on("click", function(event) {
       event.preventDefault();
       var id = $(this).data("id");
-      $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
+      $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit', function() {
+        $('#name_h3').html("")
+        $('#gift_form_break').html("<br>")
+        $('#cancel_edit_gift_div').html("<button id='cancel_edit_gift_button'>Cancel</div>")
+        $('#cancel_gift').html("")
+        $('#error_div').html("")
+        $('#break_div').html("")
+        $('#js-gift-form-div').html("")
+      })
+    })
+  })
+</script>
+
+<script>
+  $(document).on('click', '#cancel_gift_form_button', function(event) {
+    event.preventDefault()
+    $.get('/events/<%= @event.id %>', function(data) {
+      $('#giftList').html($(data).filter('#giftList'))
+      $('#cancel_gift').html("")
+      $('#error_div').html("")
+      $('#break_div').html("")
+      $('#js-gift-form-div').html("")
+    })
+  })
+</script>
+
+<script>
+  $(function () {
+    $('.gift-div').submit(function() {
+      event.preventDefault()
+      var id = $(this).data("id");
+      var values = $(".edit_gift", this).serialize();
+      var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
+      posting.done(function(data) {
+        if (typeof data === "string") {
+          $('#error_div_' + id).html($(data).filter('#error_explanation'))
+          $('#break_div_' + id).html('<br>')
+          $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
+        }
+        if (typeof data === "object") {
+          $('#error_div_' + id).html("")
+          $('#break_div_' + id).html("")
+          $.get('/events/<%= @event.id %>', function(data) {
+            $('#giftList').html("")
+            $('#giftList').html($(data).filter('#giftList'))
+            $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+          })
+        }
+      })
     })
   })
 </script>

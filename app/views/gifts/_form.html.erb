@@ -16,6 +16,7 @@
 
 <div id="js-new-gift-form">
   <%= form_for [@event, gift] do |f| %>
+    <h3 id="name_h3">Name</h3>
     <%= f.text_field :name %><br>
     <h3>Assign Gift Giver(s)</h3>
     <%= f.collection_check_boxes(:giver_ids, @givers.sort_by(&:name), :id, :name) %><br>
@@ -23,6 +24,7 @@
     <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
       <%= givers_fields.text_field :name %>
     <% end %><br><br>
-    <%= f.submit 'Submit' %>
+    <%= f.submit 'Submit' %> <%= f.button 'Cancel', :id => 'cancel_gift_form_button' %>
   <% end %>
+  <div id="gift_form_break"></div>
 </div>
