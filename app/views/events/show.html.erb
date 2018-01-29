@@ -16,7 +16,7 @@
         <div id="error_div_<%= gift.id %>"></div>
         <div id="break_div_<%= gift.id %>"></div>
         <div class="gift-div" id="gift-element-<%= gift.id %>" data-id="<%= gift.id %>">
-          <%= gift.name %> - <a href="#" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
+          <%= gift.name %> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
           <% gift.givers.each do |giver| %>
             <ul>
               <li><%= link_to giver.name, giver_path(giver) %></li>
@@ -28,7 +28,7 @@
   </ul>
 </div>
 
-
+<!--load new gift form-->
 <script type="text/javascript" charset="utf-8">
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
@@ -42,6 +42,7 @@
   })
 </script>
 
+<!--submit new gift-->
 <script>
   $('#js-gift-form-div').submit(function(event) {
     event.preventDefault();
@@ -69,7 +70,8 @@
   });
 </script>
 
-<script>
+<!--load edit gift form-->
+<script type="text/javascript" charset="utf-8">
   $('.editLink').on("click", function(event) {
     event.preventDefault();
     var id = $(this).data("id");
@@ -85,6 +87,7 @@
   })
 </script>
 
+<!--cancel all gift forms-->
 <script>
   $(document).on('click', '#cancel_gift_form_button', function(event) {
     event.preventDefault()
@@ -98,6 +101,7 @@
   })
 </script>
 
+<!--submit edit gift-->
 <script>
   $('.gift-div').submit(function() {
     event.preventDefault()
@@ -123,6 +127,7 @@
   })
 </script>
 
+<!--remove gift-->
 <script>
   $('.removeLink').on("click", function(event) {
     event.preventDefault()
