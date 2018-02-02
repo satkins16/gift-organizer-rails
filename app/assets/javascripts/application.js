@@ -13,4 +13,5 @@
 //= require jquery_ujs
 //= require rails-ujs
 //= require turbolinks
+//= require gifts
 //= require_tree .

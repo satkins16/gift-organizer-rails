@@ -1,7 +1,9 @@
 
 
 <h1><%= @event.name %></h1>
-<h3><%= @event.formatted_date %> - <%= link_to 'Edit', edit_event_path(@event) %></h3>
+<div id="event_date_div">
+  <h3><%= @event.formatted_date %> - <a href="" id="edit_event_date_link">Edit</a></h3>
+</div>
 
 <button id="js-new-gift-button">Create Gift</button><br>
 
@@ -46,7 +48,7 @@
 <script>
   $('#js-gift-form-div').submit(function(event) {
     event.preventDefault();
-    
+
     var values = $("#new_gift", this).serialize();
 
     var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
@@ -145,5 +147,13 @@
         })
       })
     }
+  })
+</script>
+
+<!--load edit event date form-->
+<script>
+  $("#edit_event_date_link").on("click", function(event) {
+    event.preventDefault()
+    
   })
 </script>
