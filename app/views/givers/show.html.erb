@@ -1,7 +1,33 @@
-<h1>Giver: <%= @giver.name %> - <%= link_to 'Edit', edit_giver_path %></h1>
+<div id="giver_header_div"><h1 id="giver_header" data-id="<%= @giver.id %>">Giver: <%= @giver.name %> - <a href="" id="edit_giver_link" data-id="<%= @giver.id %>">Edit</a></h1></div>
 <h2>Gifts:</h2>
 <% @giver.gifts.includes(:event).order("events.date, gifts.name").each do |gift| %>
   <ul>
     <li><%= link_to "#{gift.event.formatted_date} - #{gift.event.name}", event_path(gift.event) %>: <%= gift.name %></li>
   </ul>
 <% end %>
+
+<!--load edit giver form-->
+<script>
+  $('#edit_giver_link').on("click", function(event) {
+    event.preventDefault()
+    $('#giver_header').load('/givers/<%= @giver.id %>/edit')
+  })
+</script>
+
+<!--submit edit giver-->
+<script>
+  $('#giver_header').submit(function() {
+
+    event.preventDefault()
+
+    var id = $(this).data("id");
+    var values = $(".edit_giver", this).serialize();
+    var posting = $.post(`/givers/` + id, values);
+
+    posting.done(function(data) {
+      $.get('/givers/' + id, function(data) {
+        $('#giver_header_div').html($(data).filter('#giver_header_div'))
+      })
+    })
+  })
+</script>

@@ -1,4 +1,5 @@
 class GiversController < ApplicationController
+  layout false, only: [:edit]
 
   def index
     @givers = current_user_givers
@@ -16,7 +17,7 @@ class GiversController < ApplicationController
     @giver = Giver.find(params[:id])
     @giver.update(giver_params)
 
-    redirect_to giver_path(@giver)
+    render json: @giver, status: 204
   end
 
   private

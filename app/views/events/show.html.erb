@@ -46,7 +46,7 @@
 <script>
   $('#js-gift-form-div').submit(function(event) {
     event.preventDefault();
-
+    
     var values = $("#new_gift", this).serialize();
 
     var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
