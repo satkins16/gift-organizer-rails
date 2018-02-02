@@ -1,8 +1,8 @@
 
 
-<h1><%= @event.name %></h1>
-<div id="event_date_div">
-  <h3><%= @event.formatted_date %> - <a href="" id="edit_event_date_link">Edit</a></h3>
+<div id="event_header_div">
+  <h1><%= @event.name %></h1>
+  <h3><%= @event.formatted_date %> - <a href="" id="edit_event_link">Edit</a></h3>
 </div>
 
 <button id="js-new-gift-button">Create Gift</button><br>
@@ -152,8 +152,10 @@
 
 <!--load edit event date form-->
 <script>
-  $("#edit_event_date_link").on("click", function(event) {
+  $("#edit_event_link").on("click", function(event) {
     event.preventDefault()
-    
+    $('#event_header_div').load('/events/<%= @event.id %>/edit', function() {
+      
+    })
   })
 </script>
