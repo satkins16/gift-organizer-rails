@@ -165,7 +165,7 @@
     var posting = $.post(`/events/<%= @event.id %>`, values);
     posting.done(function(data) {
       if (typeof data === "string") {
-        $('#event_header_error_div').html($(data).find('#error_explanation'))
+        $('#event_header_div').html($(data).filter('#edit_event_div'))
       }
       if (typeof data === "object") {
         $.get('/events/<%= @event.id %>', function(data) {

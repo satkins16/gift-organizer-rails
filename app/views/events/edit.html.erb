@@ -1,3 +1,4 @@
-<h1>Edit <%= @event.name %></h1>
+<div id="edit_event_div">
   <div id="event_header_error_div"></div>
-<%= render :partial => 'form', :locals => {event: @event} %>
+  <%= render :partial => 'form', :locals => {event: @event} %>
+</div>
