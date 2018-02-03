@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  layout false, only: [:edit]
 
   def index
     @events = Event.all
@@ -28,11 +29,10 @@ class EventsController < ApplicationController
   end
 
   def update
-    event = current_event
-    if event.update(event_params)
-      redirect_to event_path(event)
+    @event = current_event
+    if @event.update(event_params)
+      render json: @event, status: 201
     else
-      @event = event
       render :edit
     end
   end
