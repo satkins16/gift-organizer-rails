@@ -9,3 +9,5 @@ X-Edit giver in Giver Show
 -Having to click twice
   -Maybe document on click instead of just specific div on click??
 X-Cancel separation of concerns
+-Gift form margins
+-Name h3 being removed from new gift form
