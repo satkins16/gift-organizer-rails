@@ -19,7 +19,9 @@
     <h3 id="name_h3">Name</h3>
     <%= f.text_field :name %><br>
     <h3>Assign Gift Giver(s)</h3>
-    <%= f.collection_check_boxes(:giver_ids, @givers.sort_by(&:name), :id, :name) %><br>
+    <div id="giver_collection"><%= f.collection_check_boxes(:giver_ids, @givers.sort_by(&:name), :id, :name) do |b| %>
+      <div style="float: left"><%= b.check_box %><%= b.label %></div>
+    <% end %><br></div>
     <h3>Or Add New Gift Giver(s)</h3>
     <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
       <%= givers_fields.text_field :name %>
