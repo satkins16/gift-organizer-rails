@@ -1,8 +1,16 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.divider{
+.divider {
     width:5px;
     height:auto;
     display:inline-block;
+}
+
+.event_name_input {
+  font-size: 30px;
+  margin-top: 22px;
+  height: 32px;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
 }

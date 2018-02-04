@@ -157,6 +157,16 @@
   })
 </script>
 
+<!--cancel event form-->
+<script>
+  $(document).on('click', '#event_form_cancel', function(event) {
+    event.preventDefault()
+    $.get('/events/<%= @event.id %>', function(data) {
+      $('#event_header_div').html($(data).filter('#event_header_div'))
+    })
+  })
+</script>
+
 <!--submit edit event-->
 <script>
   $('#event_header_div').submit(function() {

@@ -17,8 +17,7 @@
 </div>
 
 <%= form_for event do |f| %>
-  <%= f.text_area :name, size: "900%x900%" %><br><br>
-  <%= f.label :date %><br>
+  <%= f.text_area :name, class: 'event_name_input' %><br><br>
   <%= f.date_field :date %><br><br>
-  <%= f.submit 'Submit' %><br><br>
+  <%= f.submit 'Submit' %> <%= button_tag 'Cancel', type: 'button', id: 'event_form_cancel' %><br><br>
 <% end %>

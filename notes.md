@@ -7,4 +7,5 @@ X-In Show Givers, organize the same giver in the same event alphabetically
 X-Edit giver in Giver Show
 -Edit giver errors
 -Having to click twice
+  -Maybe document on click instead of just specific div on click??
 -Cancel separation of concerns
