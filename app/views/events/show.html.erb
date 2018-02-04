@@ -30,7 +30,7 @@
 </div>
 
 <!--load new gift form-->
-<script type="text/javascript" charset="utf-8">
+<script>
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
     $('#cancel_gift').html('<br><button id="cancel_gift_button">Cancel</button>')
@@ -72,7 +72,7 @@
 </script>
 
 <!--load edit gift form-->
-<script type="text/javascript" charset="utf-8">
+<script>
   $('.editLink').on("click", function(event) {
     event.preventDefault();
     var id = $(this).data("id");
@@ -88,16 +88,17 @@
   })
 </script>
 
-<!--cancel all gift forms-->
+<!--cancel new AND edit gift forms-->
 <script>
-  $(document).on('click', '#cancel_gift_form_button', function(event) {
+  $(document).on('click', '.gift_form_cancel', function(event) {
     event.preventDefault()
+    var id = this.id
     $.get('/events/<%= @event.id %>', function(data) {
-      $('#giftList').html($(data).filter('#giftList'))
-      $('#cancel_gift').html("")
-      $('#error_div').html("")
-      $('#break_div').html("")
-      $('#js-gift-form-div').html("")
+      $('#gift-element-' + id).html($(data).find('#gift-element-' + id))
+      if ($('#break_div').html() === ('<br>')) {
+        $('#break_div').html("")
+        $('#js-gift-form-div').html("")
+      }
     })
   })
 </script>
