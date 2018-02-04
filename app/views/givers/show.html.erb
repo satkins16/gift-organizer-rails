@@ -14,6 +14,16 @@
   })
 </script>
 
+<!--cancel edit giver form-->
+<script>
+  $(document).on('click', '#giver_form_cancel', function(event) {
+    event.preventDefault()
+    $.get('/givers/<%= @giver.id %>', function(data) {
+        $('#giver_header_div').html($(data).filter('#giver_header_div'))
+    })
+  })
+</script>
+
 <!--submit edit giver-->
 <script>
   $('#giver_header').submit(function() {

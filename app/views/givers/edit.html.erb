@@ -1,3 +1,3 @@
 <%= form_for @giver do |f| %>
-  <%= f.text_field :name %> <%= f.submit 'Submit' %>
+  <%= f.text_field :name %> <%= f.submit 'Submit' %> <%= button_tag 'Cancel', type: 'button', id: 'giver_form_cancel' %>
 <% end %>

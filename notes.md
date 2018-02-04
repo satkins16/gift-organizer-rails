@@ -5,9 +5,10 @@ X-Edit event in Event Show
   X-Submit goes grey after error
 X-Edit event errors
 X-Edit giver in Giver Show
--Edit giver errors
+  X-Cancel button
+X-Edit giver errors
 -Having to click twice
   -Maybe document on click instead of just specific div on click??
 X-Cancel separation of concerns
 -Gift form margins
--Name h3 being removed from new gift form
+X-Name h3 being removed from new gift form
