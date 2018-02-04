@@ -11,9 +11,14 @@
   </ul>
 <% end %>
 
+<!--load new event form-->
 <script type="text/javascript" charset="utf-8">
   $('#js-new-event-button').on("click", function(event) {
     event.preventDefault()
-    $('#js-event-form').load('/events/new #new_event')
+    $.get('/events/new', function(data) {
+      $('#js-event-form').html(data)
+      $('#event_name_label').html("Name")
+      $('#event_date_label').html("Date")
+    })
   })
 </script>

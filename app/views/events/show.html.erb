@@ -33,7 +33,8 @@
 <script>
   $('#js-new-gift-button').on("click", function(event) {
     event.preventDefault()
-    $('#js-gift-form-div').load('/events/<%= @event.id %>/gifts/new', function() {
+    $.get('/events/<%= @event.id %>/gifts/new', function(data) {
+      $('#js-gift-form-div').html(data)
       $('#name_h3').html("Name")
       $('#break_div').html('<br>')
     })
@@ -78,7 +79,8 @@
   $('.editLink').on("click", function(event) {
     event.preventDefault();
     var id = $(this).data("id");
-    $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit', function() {
+    $.get('/events/<%= @event.id %>/gifts/' + id + '/edit', function(data) {
+      $('#gift-element-' + id).html(data)
       $('#name_h3').html("")
       $('#gift_form_break').html("<br>")
       $('#cancel_edit_gift_div').html("<button id='cancel_edit_gift_button'>Cancel</div>")
@@ -160,7 +162,10 @@
 <script>
   $("#edit_event_link").on("click", function(event) {
     event.preventDefault()
-    $('#event_header_div').load('/events/<%= @event.id %>/edit')
+    $.get('/events/<%= @event.id %>/edit', function(data) {
+      $('#event_header_div').html(data)
+      $('#event_input_break').html("<br>")
+    })
   })
 </script>
 

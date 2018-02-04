@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  layout false, only: [:edit]
+  layout false, only: [:edit, :new]
 
   def index
     @events = Event.all

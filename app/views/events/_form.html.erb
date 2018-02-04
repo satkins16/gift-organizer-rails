@@ -17,7 +17,10 @@
 </div>
 
 <%= form_for event do |f| %>
+  <div id="event_name_label"></div>
+  <div id="event_input_break"></div>
   <%= f.text_area :name, class: 'event_name_input' %><br><br>
+  <div id="event_date_label"></div>
   <%= f.date_field :date %><br><br>
   <%= f.submit 'Submit' %> <%= button_tag 'Cancel', type: 'button', id: 'event_form_cancel' %><br><br>
 <% end %>

@@ -9,8 +9,22 @@
 
 .event_name_input {
   font-size: 30px;
-  margin-top: 22px;
+  margin-top: 0px;
   height: 32px;
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
+}
+
+#event_break {
+  height: 22px
+}
+
+#event_name_label {
+  font-size: 2em;
+  font-weight: bold
+}
+
+#event_date_label {
+  font-size: 2em;
+  font-weight: bold;
 }
