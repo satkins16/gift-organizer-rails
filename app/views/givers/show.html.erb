@@ -8,7 +8,7 @@
 
 <!--load edit giver form-->
 <script>
-  $('#edit_giver_link').on("click", function(event) {
+  $(document).on("click", '#edit_giver_link', function(event) {
     event.preventDefault()
     $('#giver_header').load('/givers/<%= @giver.id %>/edit')
   })

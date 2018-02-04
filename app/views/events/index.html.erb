@@ -22,3 +22,11 @@
     })
   })
 </script>
+
+<!--cancel new event form-->
+<script>
+  $(document).on('click', '#event_form_cancel', function(event) {
+    event.preventDefault()
+    $('#js-event-form').html("")
+  })
+</script>

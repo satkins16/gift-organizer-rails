@@ -76,7 +76,7 @@
 
 <!--load edit gift form-->
 <script>
-  $('.editLink').on("click", function(event) {
+  $(document).on("click", '.editLink', function(event) {
     event.preventDefault();
     var id = $(this).data("id");
     $.get('/events/<%= @event.id %>/gifts/' + id + '/edit', function(data) {
@@ -160,7 +160,7 @@
 
 <!--load edit event form-->
 <script>
-  $("#edit_event_link").on("click", function(event) {
+  $(document).on("click", "#edit_event_link", function(event) {
     event.preventDefault()
     $.get('/events/<%= @event.id %>/edit', function(data) {
       $('#event_header_div').html(data)

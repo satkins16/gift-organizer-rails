@@ -12,3 +12,4 @@ X-Edit giver errors
 X-Cancel separation of concerns
 X-Gift form margins
 X-Name h3 being removed from new gift form
+-Thank you checklist
