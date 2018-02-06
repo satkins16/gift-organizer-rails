@@ -38,12 +38,10 @@
     var posting = $.post(`/givers/` + id, values);
 
     posting.done(function(data) {
-       //use this.data for some reason
-      if (typeof this.data === "string") {
-        $('#giver_error_div').html($(data).filter('#edit_giver_error'))
+      if (typeof data === "string") {
+        $('#giver_header_div').html($(data).filter('#edit_giver_form'))
       }
-      debugger
-      if (typeof $(data) === "object") {
+      if (typeof data === "object") {
         $.get('/givers/' + id, function(data) {
           $('#giver_header_div').html($(data).filter('#giver_header_div'))
         })

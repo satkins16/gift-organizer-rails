@@ -1,4 +1,4 @@
-<div id="edit_giver_error>">
+<div id="edit_giver_form">
   <% if @giver %>
     <% if @giver.errors.any? %>
       <div id="error_explanation">
@@ -14,8 +14,10 @@
       </div>
     <% end %>
   <% end %>
-</div>
 
-<%= form_for @giver do |f| %>
-  <%= f.text_field :name %> <%= f.submit 'Submit' %> <%= button_tag 'Cancel', type: 'button', id: 'giver_form_cancel' %>
-<% end %>
+
+  <%= form_for @giver do |f| %>
+    <%= f.text_field :name %> <%= f.submit 'Submit' %> <%= button_tag 'Cancel', type: 'button', id: 'giver_form_cancel' %>
+  <% end %>
+
+</div>

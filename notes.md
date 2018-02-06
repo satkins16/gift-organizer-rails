@@ -6,7 +6,7 @@ X-Edit event in Event Show
 X-Edit event errors
 X-Edit giver in Giver Show
   X-Cancel button
-  -Errors
+  X-Errors
 X-Edit giver errors
 X-Having to click twice
   X-Maybe document on click instead of just specific div on click??

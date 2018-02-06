@@ -15,9 +15,11 @@ class GiversController < ApplicationController
 
   def update
     @giver = Giver.find(params[:id])
-    @giver.update(giver_params)
-
-    render json: @giver, status: 204
+    if @giver.update(giver_params)
+      render json: @giver, status: 201
+    else
+      render :edit
+    end
   end
 
   private
