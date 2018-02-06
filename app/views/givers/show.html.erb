@@ -1,4 +1,5 @@
-<div id="giver_header_div"><h1 id="giver_header" data-id="<%= @giver.id %>">Giver: <%= @giver.name %> - <a href="" id="edit_giver_link" data-id="<%= @giver.id %>">Edit</a></h1></div>
+<div id="giver_error_div"></div>
+<div id="giver_header_div" data-id="<%= @giver.id %>"><h1 id="giver_header" data-id="<%= @giver.id %>">Giver: <%= @giver.name %> - <a href="" id="edit_giver_link" data-id="<%= @giver.id %>">Edit</a></h1></div>
 <h2>Gifts:</h2>
 <% @giver.gifts.includes(:event).order("events.date, gifts.name").each do |gift| %>
   <ul>
@@ -10,7 +11,9 @@
 <script>
   $(document).on("click", '#edit_giver_link', function(event) {
     event.preventDefault()
-    $('#giver_header').load('/givers/<%= @giver.id %>/edit')
+    $.get('/givers/<%= @giver.id %>/edit', function(data) {
+      $('#giver_header').html(data)
+    })
   })
 </script>
 
@@ -26,7 +29,7 @@
 
 <!--submit edit giver-->
 <script>
-  $('#giver_header').submit(function() {
+  $('#giver_header_div').submit(function() {
 
     event.preventDefault()
 
@@ -35,9 +38,16 @@
     var posting = $.post(`/givers/` + id, values);
 
     posting.done(function(data) {
-      $.get('/givers/' + id, function(data) {
-        $('#giver_header_div').html($(data).filter('#giver_header_div'))
-      })
+       //use this.data for some reason
+      if (typeof this.data === "string") {
+        $('#giver_error_div').html($(data).filter('#edit_giver_error'))
+      }
+      debugger
+      if (typeof $(data) === "object") {
+        $.get('/givers/' + id, function(data) {
+          $('#giver_header_div').html($(data).filter('#giver_header_div'))
+        })
+      }
     })
   })
 </script>
