@@ -1,3 +1,4 @@
+<div id="giver_errors"></div>
 <div id="giver_header_div" data-id="<%= @giver.id %>"><h1 id="giver_header" data-id="<%= @giver.id %>">Giver: <%= @giver.name %> - <a href="" id="edit_giver_link" data-id="<%= @giver.id %>">Edit</a></h1></div>
 <h2>Gifts:</h2>
 <% @giver.gifts.includes(:event).order("events.date, gifts.name").each do |gift| %>
@@ -38,11 +39,13 @@
 
     posting.done(function(data) {
       if (typeof data === "string") {
-        $('#giver_header_div').html($(data).filter('#edit_giver_form'))
+        $('#giver_errors').html($(data).find('#error_explanation'))
+        $('#giver_header_div').load('/givers/' + id + '/edit')
       }
       if (typeof data === "object") {
         $.get('/givers/' + id, function(data) {
           $('#giver_header_div').html($(data).filter('#giver_header_div'))
+          $('#giver_errors').html("")
         })
       }
     })
