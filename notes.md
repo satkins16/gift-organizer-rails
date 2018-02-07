@@ -7,7 +7,7 @@ X-Edit event errors
 X-Edit giver in Giver Show
   X-Cancel button
   X-Errors
-    -Buttons line break after error
+    X-Buttons line break after error
     -Refill input after error
 X-Edit giver errors
 X-Having to click twice

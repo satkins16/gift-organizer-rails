@@ -1,4 +1,3 @@
-<div id="giver_error_div"></div>
 <div id="giver_header_div" data-id="<%= @giver.id %>"><h1 id="giver_header" data-id="<%= @giver.id %>">Giver: <%= @giver.name %> - <a href="" id="edit_giver_link" data-id="<%= @giver.id %>">Edit</a></h1></div>
 <h2>Gifts:</h2>
 <% @giver.gifts.includes(:event).order("events.date, gifts.name").each do |gift| %>
