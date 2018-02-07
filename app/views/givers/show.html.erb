@@ -23,6 +23,7 @@
     event.preventDefault()
     $.get('/givers/<%= @giver.id %>', function(data) {
         $('#giver_header_div').html($(data).filter('#giver_header_div'))
+        $('#giver_errors').html("")
     })
   })
 </script>
@@ -39,8 +40,10 @@
 
     posting.done(function(data) {
       if (typeof data === "string") {
-        $('#giver_errors').html($(data).find('#error_explanation'))
-        $('#giver_header_div').load('/givers/' + id + '/edit')
+        $.get('/givers/' + id + '/edit', function(data2) {
+          $('#giver_header_div').html($(data2))
+          $('#giver_errors').html($(data).find('#error_explanation'))
+        })
       }
       if (typeof data === "object") {
         $.get('/givers/' + id, function(data) {
