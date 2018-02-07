@@ -8,7 +8,7 @@ X-Edit giver in Giver Show
   X-Cancel button
   X-Errors
     X-Buttons line break after error
-    -Refill input after error
+    X-Refill input after error
 X-Edit giver errors
 X-Having to click twice
   X-Maybe document on click instead of just specific div on click??
