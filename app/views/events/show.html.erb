@@ -1,4 +1,4 @@
-
+<div id="edit_event_errors"></div>
 <div id="event_header_div">
   <h1><%= @event.name %></h1>
   <h3><%= @event.formatted_date %> - <a href="" id="edit_event_link">Edit</a></h3>
@@ -187,11 +187,15 @@
     var posting = $.post(`/events/<%= @event.id %>`, values);
     posting.done(function(data) {
       if (typeof data === "string") {
-        $('#event_header_div').html($(data).filter('#edit_event_div'))
+        $.get('/events/<%= @event.id %>/edit', function(data2) {
+          $('#event_header_div').html($(data2).filter('#edit_event_div'))
+          $('#edit_event_errors').html($(data).find('#error_explanation'))
+        })
       }
       if (typeof data === "object") {
         $.get('/events/<%= @event.id %>', function(data) {
           $('#event_header_div').html($(data).filter('#event_header_div'))
+          $('#edit_event_errors').html("")
         })
       }
     })
