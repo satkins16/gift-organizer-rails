@@ -17,3 +17,14 @@
 #gift_form_break {
   height: 5px;
 }
+
+.thanked_div:hover {
+    background: #ddd;
+    cursor: pointer
+}
+
+/* When clicked on, add a background color and strike out text */
+.thanked_div {
+    background: #888;
+    color: #fff;
+}
