@@ -120,17 +120,19 @@
     var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
     posting.done(function(data) {
       if (typeof data === "string") {
-        $('#error_div_' + id).html($(data).filter('#error_explanation'))
-        $('#break_div_' + id).html('<br>')
-        $('#gift-element-' + id).load('/events/<%= @event.id %>/gifts/' + id + '/edit')
+        $.get('/events/<%= @event.id %>/gifts/' + id + '/edit', function(data2) {
+          $('#gift-element-' + id).html(data2)
+          $('#error_div_' + id).html($(data).filter('#error_explanation'))
+          $('#break_div_' + id).html('<br>')
+        })
       }
       if (typeof data === "object") {
         $('#error_div_' + id).html("")
         $('#break_div_' + id).html("")
-        $.get('/events/<%= @event.id %>', function(data) {
-          $('#giftList').html("")
-          $('#giftList').html($(data).filter('#giftList'))
-          $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+        $.get('/events/<%= @event.id %>', function(data2) {
+          debugger
+          $('#gift-element-' + id).html($(data2).filter('#gift-element-' + id))
+          $('#js-gift-form-div').html($(data2).filter('#js-gift-form-div'))
         })
       }
     })
@@ -175,6 +177,7 @@
     event.preventDefault()
     $.get('/events/<%= @event.id %>', function(data) {
       $('#event_header_div').html($(data).filter('#event_header_div'))
+      $('#edit_event_errors').html("")
     })
   })
 </script>

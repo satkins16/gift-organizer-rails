@@ -40,6 +40,7 @@ class GiftsController < ApplicationController
   def update
     @gift = Gift.find(params[:id])
     if @gift.update(gift_params)
+
       render json: @gift, status: 201
     else
       @event = current_gift_event
