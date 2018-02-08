@@ -130,8 +130,7 @@
         $('#error_div_' + id).html("")
         $('#break_div_' + id).html("")
         $.get('/events/<%= @event.id %>', function(data2) {
-          debugger
-          $('#gift-element-' + id).html($(data2).filter('#gift-element-' + id))
+          $('#gift-element-' + id).html($(data2).find('#gift-element-' + id))
           $('#js-gift-form-div').html($(data2).filter('#js-gift-form-div'))
         })
       }
