@@ -2,14 +2,14 @@ Rails.application.routes.draw do
   resources :gift_givers
   resources :givers
   resources :events do
-    patch 'thank', to: 'gifts#thank'
     resources :gifts do
+      patch 'thank'
     end
   end
 
   get 'users', to: 'application#users_index'
 
-
+  post "/gifts/:id/thank" => "gifts#thank"
 
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

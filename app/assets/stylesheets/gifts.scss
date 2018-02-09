@@ -1,30 +1,3 @@
 // Place all the styles related to the gifts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#name_h3 {
-    margin-top: 0cm;
-    margin-bottom: 5px;
-}
-
-#assign_h3 {
-  margin-bottom: 5px;
-}
-
-#add_giver_h3 {
-  margin-bottom: 5px;
-}
-
-#gift_form_break {
-  height: 5px;
-}
-
-.thanked_div:hover {
-    background: #ddd;
-    cursor: pointer
-}
-
-/* When clicked on, add a background color and strike out text */
-.thanked_div {
-    background: #888;
-    color: #fff;
-}

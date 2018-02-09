@@ -50,18 +50,12 @@ class GiftsController < ApplicationController
   end
 
   def thank
-    gift_ids = params[:event][:gift_ids]
-    @event = current_gift_event
-    @event.gifts.all.each do |gift|
-      if gift_ids.include? gift.id.to_s
-        gift.thanked = 1
-      else
-        gift.thanked = 0
-      end
-      gift.save
+    gift = Gift.find(params[:id])
+    if gift.thanked == 0
+      gift.thanked = 1
+    elsif gif.thanked == 1
+      gift.thanked = 0
     end
-
-    redirect_to event_path(current_gift_event)
   end
 
   def destroy

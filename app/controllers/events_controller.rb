@@ -37,17 +37,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def thank
-    Gift.all.each do |gift|
-      if params[:event][:gift_ids].map(&:to_i).include? gift.id
-        gift.thanked = 1
-      else
-        gift.thanked = 0
-      end
-    end
-    redirect_to event_path(current_gift_event)
-  end
-
 
   private
 

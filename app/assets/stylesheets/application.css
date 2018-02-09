@@ -45,3 +45,20 @@ input[type=checkbox] {
   list-style-type: disc;
   margin-left: 8%;
 }
+
+#name_h3 {
+    margin-top: 0cm;
+    margin-bottom: 5px;
+}
+
+#assign_h3 {
+  margin-bottom: 5px;
+}
+
+#add_giver_h3 {
+  margin-bottom: 5px;
+}
+
+#gift_form_break {
+  height: 5px;
+}
