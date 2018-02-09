@@ -17,6 +17,14 @@ body {background-color: lightskyblue;}
 
 .thanked_div {
   border: 0;
+  background-color: #3FFE7C;
+  box-shadow: none;
+  border-radius: 0px;
+  font-weight: bold;
+}
+
+.not_thanked_div {
+  border: 0;
   background-color: #ff4d4d;
   box-shadow: none;
   border-radius: 0px;

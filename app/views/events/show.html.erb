@@ -18,9 +18,9 @@
         <div id="break_div_<%= gift.id %>"></div>
         <div class="gift-div" id="gift-element-<%= gift.id %>" data-id="<%= gift.id %>">
           <% if gift.thanked == 0 %>
-            <%= button_tag "Not Thanked",  data: {id: gift.id}, class: "thanked_div", id: `thanked_#{gift.id}` %>
+            <%= button_tag "THANKED",  data: {id: gift.id}, class: "thanked_div", id: `thanked_#{gift.id}` %>
           <% elsif gift.thanked == 1 %>
-            <%= button_tag "Thanked", data: {id: gift.id}, class: "thanked_div", id: `thanked_#{gift.id}` %>
+            <%= button_tag "NOT THANKED", data: {id: gift.id}, class: "not_thanked_div", id: `thanked_#{gift.id}` %>
           <% end %>
           <%= gift.name %> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
           <% gift.givers.each do |giver| %>
@@ -33,6 +33,17 @@
     <% end %>
   </ul>
 </div>
+
+<!--document ready css-->
+<script>
+  $(document).ready(function() {
+    if ($('.thanked_div').html() === "THANKED") {
+      $('.thanked_div').css("background-color", "#3FFE7C")
+    } else if ($('.thanked_div').html() === "NOT THANKED") {
+      $('.thanked_div').css("background-color", "#ff4d4d")
+    }
+  })
+</script>
 
 <!--load new gift form-->
 <script>
@@ -214,22 +225,47 @@
   $(".thanked_div").hover(function(){
       $(this).css("background-color", "black");
       $(this).css("color", "white")
-      if ($(this).html() === "Not Thanked") {
-        $(this).html("Thank?")
+      if ($(this).html() === "NOT THANKED") {
+        $(this).html("THANK?")
       } else {
-        $(this).html("Unthank?")
+        $(this).html("UNTHANK?")
       }
     }, function(){
-      if ($(this).html() === "Thank?") {
+      if ($(this).html() === "THANK?") {
         $(this).css("background-color", "#ff4d4d");
         $(this).css("font-weight", "bold")
         $(this).css("color", "black")
-        $(this).html("Not Thanked")
+        $(this).html("NOT THANKED")
       } else {
         $(this).css("background-color", "#ff4d4d");
         $(this).css("font-weight", "bold")
         $(this).css("color", "black")
-        $(this).html("Thanked")
+        $(this).html("THANKED")
+      }
+  });
+</script>
+
+<!--not thanked hover-->
+<script>
+  $(".not_thanked_div").hover(function(){
+      $(this).css("background-color", "black");
+      $(this).css("color", "white")
+      if ($(this).html() === "NOT THANKED") {
+        $(this).html("THANK?")
+      } else {
+        $(this).html("UNTHANK?")
+      }
+    }, function(){
+      if ($(this).html() === "THANK?") {
+        $(this).css("background-color", "#ff4d4d");
+        $(this).css("font-weight", "bold")
+        $(this).css("color", "black")
+        $(this).html("NOT THANKED")
+      } else {
+        $(this).css("background-color", "#ff4d4d");
+        $(this).css("font-weight", "bold")
+        $(this).css("color", "black")
+        $(this).html("THANKED")
       }
   });
 </script>
@@ -239,6 +275,55 @@
   $(document).on('click', '.thanked_div', function(event) {
     event.preventDefault()
     var id = $(this).data("id")
-    $.get('/gifts/' + id + '/thank')
+    $.get('/gifts/' + id + '/thank', function() {
+    })
+    if ($(this).html() === "THANK?") {
+      $(this).html("THANKED")
+      $(this).css("background-color", "#3FFE7C")
+      $(this).css("color", "black")
+      $(this).on('mouseout', function() {
+        $(this).html("THANKED")
+        $(this).css("background-color", "#3FFE7C")
+        $(this).css("color", "black")
+      })
+    } else {
+      $(this).html("NOT THANKED")
+      $(this).css("background-color", "#ff4d4d");
+      $(this).css("color", "black")
+      $(this).on('mouseout', function() {
+        $(this).html("NOT THANKED")
+        $(this).css("background-color", "#ff4d4d");
+        $(this).css("color", "black")
+      })
+    }
+  })
+</script>
+
+<!--not thanked click-->
+<script>
+  $(document).on('click', '.not_thanked_div', function(event) {
+    event.preventDefault()
+    var id = $(this).data("id")
+    $.get('/gifts/' + id + '/thank', function() {
+    })
+    if ($(this).html() === "THANK?") {
+      $(this).html("THANKED")
+      $(this).css("background-color", "#3FFE7C")
+      $(this).css("color", "black")
+      $(this).on('mouseout', function() {
+        $(this).html("THANKED")
+        $(this).css("background-color", "#3FFE7C")
+        $(this).css("color", "black")
+      })
+    } else {
+      $(this).html("NOT THANKED")
+      $(this).css("background-color", "#ff4d4d");
+      $(this).css("color", "black")
+      $(this).on('mouseout', function() {
+        $(this).html("NOT THANKED")
+        $(this).css("background-color", "#ff4d4d");
+        $(this).css("color", "black")
+      })
+    }
   })
 </script>
