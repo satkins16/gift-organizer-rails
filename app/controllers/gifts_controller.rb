@@ -53,8 +53,10 @@ class GiftsController < ApplicationController
     gift = Gift.find(params[:id])
     if gift.thanked == 0
       gift.thanked = 1
-    elsif gif.thanked == 1
+      gift.save
+    elsif gift.thanked == 1
       gift.thanked = 0
+      gift.save
     end
   end
 

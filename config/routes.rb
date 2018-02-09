@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'users', to: 'application#users_index'
 
-  post "/gifts/:id/thank" => "gifts#thank"
+  get '/gifts/:id/thank', to: 'gifts#thank'
 
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
