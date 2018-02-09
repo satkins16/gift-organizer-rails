@@ -14,3 +14,34 @@
  *= require_self
  */
 body {background-color: lightskyblue;}
+
+.thanked_div {
+  border: 0;
+  background-color: #ff4d4d;
+  box-shadow: none;
+  border-radius: 0px;
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+}
+
+input[type=submit] {
+  cursor: pointer;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+}
+
+.no_bullet_list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0
+}
+
+.bullet_list {
+  list-style-type: disc;
+  margin-left: 8%;
+}

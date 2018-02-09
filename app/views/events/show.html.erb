@@ -11,15 +11,15 @@
 <div id="js-gift-form-div"></div>
 
 <div id="giftList">
-  <ul>
+  <ul class="no_bullet_list">
     <% @event.gifts.sort_by(&:name).each do |gift| %>
-      <li>
+      <li class="no_button_list">
         <div id="error_div_<%= gift.id %>"></div>
         <div id="break_div_<%= gift.id %>"></div>
         <div class="gift-div" id="gift-element-<%= gift.id %>" data-id="<%= gift.id %>">
-          <%= gift.name %> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a> <span class="thanked_div checked" id="thanked_<%= gift.id %>" data-id="<%= gift.id %>">Not Thanked</span>
+          <button class="thanked_div checked" id="thanked_<%= gift.id %>" data-id="<%= gift.id %>">Not Thanked</button> <%= gift.name %> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
           <% gift.givers.each do |giver| %>
-            <ul>
+            <ul class="bullet_list">
               <li><%= link_to giver.name, giver_path(giver) %></li>
             </ul>
           <% end %>
