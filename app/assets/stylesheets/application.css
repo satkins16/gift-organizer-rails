@@ -21,6 +21,10 @@ body {background-color: lightskyblue;}
   box-shadow: none;
   border-radius: 0px;
   font-weight: bold;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  width: 97px;
 }
 
 .not_thanked_div {
@@ -29,6 +33,10 @@ body {background-color: lightskyblue;}
   box-shadow: none;
   border-radius: 0px;
   font-weight: bold;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  width: 97px;
 }
 
 button {
@@ -51,7 +59,7 @@ input[type=checkbox] {
 
 .bullet_list {
   list-style-type: disc;
-  margin-left: 8%;
+  margin-left: 9.5%;
 }
 
 #name_h3 {
