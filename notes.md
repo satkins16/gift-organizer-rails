@@ -15,5 +15,5 @@ X-Having to click twice
 X-Cancel separation of concerns
 X-Gift form margins
 X-Name h3 being removed from new gift form
--Thank you checklist
+X-Thank you checklist
 X-In events show, after submitting an edit gift, changing givers and submitting again redirects to json view

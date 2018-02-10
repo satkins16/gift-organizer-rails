@@ -17,9 +17,9 @@
         <div id="error_div_<%= gift.id %>"></div>
         <div id="break_div_<%= gift.id %>"></div>
         <div class="gift-div" id="gift-element-<%= gift.id %>" data-id="<%= gift.id %>">
-          <% if gift.thanked == 0 %>
+          <% if gift.thanked == 1 %>
             <%= button_tag "THANKED",  data: {id: gift.id}, class: "thanked_div", id: `thanked_#{gift.id}` %>
-          <% elsif gift.thanked == 1 %>
+          <% elsif gift.thanked == 0 %>
             <%= button_tag "NOT THANKED", data: {id: gift.id}, class: "not_thanked_div", id: `thanked_#{gift.id}` %>
           <% end %>
           <%= gift.name %> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>

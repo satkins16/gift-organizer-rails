@@ -54,12 +54,24 @@ input[type=checkbox] {
 .no_bullet_list {
   list-style-type: none;
   padding-left: 0;
-  margin-left: 0
+  margin-left: 0;
 }
 
 .bullet_list {
   list-style-type: disc;
   margin-left: 9.5%;
+}
+
+.bullet_list:last-child {
+  list-style-type: disc;
+  margin-left: 9.5%;
+  margin-bottom: 1%;
+}
+
+.edit_gift {
+  margin-left: 10%;
+  margin-bottom: .7%;
+  margin-top: .9%
 }
 
 #name_h3 {
@@ -77,4 +89,8 @@ input[type=checkbox] {
 
 #gift_form_break {
   height: 5px;
+}
+
+#list_break {
+  height: 100px
 }
