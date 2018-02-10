@@ -51,7 +51,7 @@
     event.preventDefault()
     $.get('/events/<%= @event.id %>/gifts/new', function(data) {
       $('#js-gift-form-div').html(data)
-      $('#name_h3').html("Name")
+      $('#name_h3').html("Gift")
       $('#break_div').html('<br>')
     })
     $.get('/events/<%= @event.id %>', function(data) {
@@ -131,6 +131,7 @@
 <script>
   $('.gift-div').submit(function() {
     event.preventDefault()
+    alert("hey there")
     var id = $(this).data("id");
     var values = $(".edit_gift", this).serialize();
     var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
