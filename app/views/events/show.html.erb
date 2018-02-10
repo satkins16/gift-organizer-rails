@@ -131,7 +131,6 @@
 <script>
   $('.gift-div').submit(function() {
     event.preventDefault()
-    alert("hey there")
     var id = $(this).data("id");
     var values = $(".edit_gift", this).serialize();
     var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
@@ -157,7 +156,7 @@
 
 <!--remove gift-->
 <script>
-  $('.removeLink').on("click", function(event) {
+  $(document).on("click", '.removeLink', function(event) {
     event.preventDefault()
     var id = $(this).data("id")
     var confirmation = confirm("Are you sure you want to delete?")
@@ -223,71 +222,69 @@
 
 <!--thank hover-->
 <script>
-$(document).on({
-    mouseenter: function () {
-      $(this).css("background-color", "black");
-      $(this).css("color", "white")
-      if ($(this).html() === "NOT THANKED") {
-        $(this).html("THANK?")
-      } else {
-        $(this).html("UNTHANK?")
+  $(document).on({
+      mouseenter: function () {
+        $(this).css("background-color", "black");
+        $(this).css("color", "white")
+        if ($(this).html() === "NOT THANKED") {
+          $(this).html("THANK?")
+        } else {
+          $(this).html("UNTHANK?")
+        }
+      },
+      mouseleave: function () {
+        if ($(this).html() === "THANK?") {
+          $(this).css("background-color", "#ff4d4d");
+          $(this).css("font-weight", "bold")
+          $(this).css("color", "black")
+          $(this).html("NOT THANKED")
+        } else if ($(this).html() === "NOT THANKED") {
+          $(this).css("background-color", "#ff4d4d");
+          $(this).css("font-weight", "bold")
+          $(this).css("color", "black")
+          $(this).html("NOT THANKED")
+        } else {
+          $(this).css("background-color", "#3FFE7C");
+          $(this).css("font-weight", "bold")
+          $(this).css("color", "black")
+          $(this).html("THANKED")
+        }
       }
-    },
-    mouseleave: function () {
-      if ($(this).html() === "THANK?") {
-        $(this).css("background-color", "#ff4d4d");
-        $(this).css("font-weight", "bold")
-        $(this).css("color", "black")
-        $(this).html("NOT THANKED")
-      } else if ($(this).html() === "NOT THANKED") {
-        $(this).css("background-color", "#ff4d4d");
-        $(this).css("font-weight", "bold")
-        $(this).css("color", "black")
-        $(this).html("NOT THANKED")
-      } else {
-        $(this).css("background-color", "#3FFE7C");
-        $(this).css("font-weight", "bold")
-        $(this).css("color", "black")
-        $(this).html("THANKED")
-      }
-    }
-}, '.thanked_div');
+  }, '.thanked_div');
 </script>
 
 <!--not thanked hover-->
 <script>
-$(document).on({
-    mouseenter: function () {
-      $(this).css("background-color", "black");
-      $(this).css("color", "white")
-      if ($(this).html() === "NOT THANKED") {
-        $(this).html("THANK?")
-      } else {
-        $(this).html("UNTHANK?")
+  $(document).on({
+      mouseenter: function () {
+        $(this).css("background-color", "black");
+        $(this).css("color", "white")
+        if ($(this).html() === "NOT THANKED") {
+          $(this).html("THANK?")
+        } else {
+          $(this).html("UNTHANK?")
+        }
+      },
+      mouseleave: function () {
+        if ($(this).html() === "THANK?") {
+          $(this).css("background-color", "#ff4d4d");
+          $(this).css("font-weight", "bold")
+          $(this).css("color", "black")
+          $(this).html("NOT THANKED")
+        } else if ($(this).html() === "NOT THANKED") {
+          $(this).css("background-color", "#ff4d4d");
+          $(this).css("font-weight", "bold")
+          $(this).css("color", "black")
+          $(this).html("NOT THANKED")
+        } else {
+          $(this).css("background-color", "#3FFE7C");
+          $(this).css("font-weight", "bold")
+          $(this).css("color", "black")
+          $(this).html("THANKED")
+        }
       }
-    },
-    mouseleave: function () {
-      if ($(this).html() === "THANK?") {
-        $(this).css("background-color", "#ff4d4d");
-        $(this).css("font-weight", "bold")
-        $(this).css("color", "black")
-        $(this).html("NOT THANKED")
-      } else if ($(this).html() === "NOT THANKED") {
-        $(this).css("background-color", "#ff4d4d");
-        $(this).css("font-weight", "bold")
-        $(this).css("color", "black")
-        $(this).html("NOT THANKED")
-      } else {
-        $(this).css("background-color", "#3FFE7C");
-        $(this).css("font-weight", "bold")
-        $(this).css("color", "black")
-        $(this).html("THANKED")
-      }
-    }
-}, '.not_thanked_div');
+  }, '.not_thanked_div');
 </script>
-
-
 
 <!--thank click-->
 <script>
