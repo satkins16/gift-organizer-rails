@@ -26,6 +26,6 @@ class GiversController < ApplicationController
 
   def giver_params
     params.require(:giver).permit(:name)
- end
+  end
 
 end

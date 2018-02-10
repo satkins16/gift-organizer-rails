@@ -31,7 +31,7 @@
     <% end %>
     <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
       <%= givers_fields.text_field :name %>
-    <% end %><br><br>
+    <% end %><br><br><%= f.submit 'Add giver', :name => "add_giver" %>
     <%= f.submit 'Submit' %> <%= button_tag 'Cancel', type: 'button', class: 'gift_form_cancel', id: gift.id %>
   <% end %>
   <div id="gift_form_break"></div>
