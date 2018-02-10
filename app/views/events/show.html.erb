@@ -129,7 +129,7 @@
 
 <!--submit edit gift-->
 <script>
-  $('.gift-div').submit(function() {
+  $(document).on('submit', '.gift-div', function() {
     event.preventDefault()
     var id = $(this).data("id");
     var values = $(".edit_gift", this).serialize();
