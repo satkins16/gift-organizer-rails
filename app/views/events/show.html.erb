@@ -223,7 +223,8 @@
 
 <!--thank hover-->
 <script>
-  $(".thanked_div").hover(function(){
+$(document).on({
+    mouseenter: function () {
       $(this).css("background-color", "black");
       $(this).css("color", "white")
       if ($(this).html() === "NOT THANKED") {
@@ -231,8 +232,14 @@
       } else {
         $(this).html("UNTHANK?")
       }
-    }, function(){
+    },
+    mouseleave: function () {
       if ($(this).html() === "THANK?") {
+        $(this).css("background-color", "#ff4d4d");
+        $(this).css("font-weight", "bold")
+        $(this).css("color", "black")
+        $(this).html("NOT THANKED")
+      } else if ($(this).html() === "NOT THANKED") {
         $(this).css("background-color", "#ff4d4d");
         $(this).css("font-weight", "bold")
         $(this).css("color", "black")
@@ -243,12 +250,14 @@
         $(this).css("color", "black")
         $(this).html("THANKED")
       }
-  });
+    }
+}, '.thanked_div');
 </script>
 
 <!--not thanked hover-->
 <script>
-  $(".not_thanked_div").hover(function(){
+$(document).on({
+    mouseenter: function () {
       $(this).css("background-color", "black");
       $(this).css("color", "white")
       if ($(this).html() === "NOT THANKED") {
@@ -256,8 +265,14 @@
       } else {
         $(this).html("UNTHANK?")
       }
-    }, function(){
+    },
+    mouseleave: function () {
       if ($(this).html() === "THANK?") {
+        $(this).css("background-color", "#ff4d4d");
+        $(this).css("font-weight", "bold")
+        $(this).css("color", "black")
+        $(this).html("NOT THANKED")
+      } else if ($(this).html() === "NOT THANKED") {
         $(this).css("background-color", "#ff4d4d");
         $(this).css("font-weight", "bold")
         $(this).css("color", "black")
@@ -268,8 +283,11 @@
         $(this).css("color", "black")
         $(this).html("THANKED")
       }
-  });
+    }
+}, '.not_thanked_div');
 </script>
+
+
 
 <!--thank click-->
 <script>
@@ -282,20 +300,10 @@
       $(this).html("THANKED")
       $(this).css("background-color", "#3FFE7C")
       $(this).css("color", "black")
-      $(this).on('mouseout', function() {
-        $(this).html("THANKED")
-        $(this).css("background-color", "#3FFE7C")
-        $(this).css("color", "black")
-      })
     } else {
       $(this).html("NOT THANKED")
       $(this).css("background-color", "#ff4d4d");
       $(this).css("color", "black")
-      $(this).on('mouseout', function() {
-        $(this).html("NOT THANKED")
-        $(this).css("background-color", "#ff4d4d");
-        $(this).css("color", "black")
-      })
     }
   })
 </script>
