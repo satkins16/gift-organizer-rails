@@ -3,16 +3,8 @@ class Gift < ApplicationRecord
   belongs_to :user, optional: true
   has_many :gift_givers
   has_many :givers, through: :gift_givers
+  accepts_nested_attributes_for :givers, allow_destroy: true, reject_if: :all_blank
   validates :name, presence: true
-
-  def givers_attributes=(giver_attributes)
-    giver_attributes.values.each do |giver_attribute|
-      unless giver_attribute[:name].blank?
-        giver = Giver.find_or_create_by(giver_attribute)
-        self.givers << giver
-      end
-    end
-  end
 
   def thanked?
     self.thanked == 1
