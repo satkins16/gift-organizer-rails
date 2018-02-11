@@ -53,6 +53,10 @@
       $('#js-gift-form-div').html(data)
       $('#name_h3').html("Gift")
       $('#break_div').html('<br>')
+      $('#new_giver_div_2').html("")
+      $('#new_giver_div_3').html("")
+      $('#new_giver_div_4').html("")
+      $('#new_giver_div_5').html("")
     })
     $.get('/events/<%= @event.id %>', function(data) {
       $('#giftList').html($(data).filter('#giftList'))
@@ -331,5 +335,13 @@
         $(this).css("color", "black")
       })
     }
+  })
+</script>
+
+<!--add giver button-->
+<script>
+  $(document).on('click', '#add_giver_button', function(event) {
+    event.preventDefault()
+    alert("yo")
   })
 </script>

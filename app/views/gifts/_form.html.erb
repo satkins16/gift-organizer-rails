@@ -25,13 +25,35 @@
       <% end %><br></div>
     <% end %>
     <% if @givers.empty? %>
-      <h3 id="add_giver_h3">Add New Gift Giver(s)</h3><br>
+      <h3 id="add_giver_h3">Add New Gift Giver(s)</h3> <button id="add_giver_button">Add Giver</button>
     <% else %>
-      <h3 id="add_giver_h3">Or Add New Gift Giver(s)</h3><br>
+      <h3 id="add_giver_h3">Or Add New Gift Giver(s)</h3> <button id="add_giver_button">Add Giver</button>
     <% end %>
-    <%= f.fields_for :givers, 5.times {gift.givers.build} do |givers_fields| %>
-      <%= givers_fields.text_field :name, class: 'new_givers' %><br>
-    <% end %>
+    <div class='new_giver_div' id="new_giver_div_1">
+      <%= f.fields_for :givers, gift.givers.build, style: 'display:none' do |givers_fields| %>
+        <%= givers_fields.text_field :name, class: 'new_givers', id: 'new_giver_1' %><br>
+      <% end %>
+    </div>
+    <div class='new_giver_div' id="new_giver_div_2">
+      <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
+        <%= givers_fields.text_field :name, class: 'new_givers', id: 'new_giver_2' %><br>
+      <% end %>
+    </div>
+    <div class='new_giver_div' id="new_giver_div_3">
+      <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
+        <%= givers_fields.text_field :name, class: 'new_givers', id: 'new_giver_3' %><br>
+      <% end %>
+    </div>
+    <div class='new_giver_div' id="new_giver_div_4">
+      <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
+        <%= givers_fields.text_field :name, class: 'new_givers', id: 'new_giver_4' %><br>
+      <% end %>
+    </div>
+    <div class='new_giver_div' id="new_giver_div_5">
+      <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
+        <%= givers_fields.text_field :name, class: 'new_givers', id: 'new_giver_5' %><br>
+      <% end %>
+    </div>
     <%= f.submit 'Submit' %> <%= button_tag 'Cancel', type: 'button', class: 'gift_form_cancel', id: gift.id %>
   <% end %>
   <div id="gift_form_break"></div>

@@ -39,10 +39,6 @@ body {background-color: lightskyblue;}
   width: 97px;
 }
 
-button {
-  cursor: pointer;
-}
-
 input[type=submit] {
   cursor: pointer;
 }
@@ -98,4 +94,12 @@ input[type=checkbox] {
 
 #list_break {
   height: 100px
+}
+
+#add_giver_button {
+  display: inline-block;
+}
+
+button {
+  cursor: pointer;
 }
