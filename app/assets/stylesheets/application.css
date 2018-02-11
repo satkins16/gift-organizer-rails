@@ -74,6 +74,10 @@ input[type=checkbox] {
   margin-top: 10px;
 }
 
+.new_givers {
+  margin-bottom: 5px;
+}
+
 #name_h3 {
     margin-top: 0cm;
     margin-bottom: 5px;
