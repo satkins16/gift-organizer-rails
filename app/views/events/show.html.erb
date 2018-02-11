@@ -338,10 +338,43 @@
   })
 </script>
 
-<!--add giver button-->
+<!--add giver buttons-->
 <script>
   $(document).on('click', '#add_giver_button', function(event) {
     event.preventDefault()
-    alert("yo")
+    $.get('/events/<%= @event.id %>/gifts/new', function(data) {
+      $('#new_giver_div_2').html($(data).find('#new_giver_div_2'))
+      $('#add_giver_button').attr('id', '#add_giver_button_2')
+    })
+  })
+</script>
+
+<script>
+  $(document).on('click', '#add_giver_button_2', function(event) {
+    event.preventDefault()
+    $.get('/events/<%= @event.id %>/gifts/new', function(data) {
+      $('#new_giver_div_3').html($(data).find('#new_giver_div_3'))
+      $('#add_giver_button').attr('id', '#add_giver_button_3')
+    })
+  })
+</script>
+
+<script>
+  $(document).on('click', '#add_giver_button_3', function(event) {
+    event.preventDefault()
+    $.get('/events/<%= @event.id %>/gifts/new', function(data) {
+      $('#new_giver_div_4').html($(data).find('#new_giver_div_4'))
+      $('#add_giver_button').attr('id', '#add_giver_button_4')
+    })
+  })
+</script>
+
+<script>
+  $(document).on('click', '#add_giver_button_4', function(event) {
+    event.preventDefault()
+    $.get('/events/<%= @event.id %>/gifts/new', function(data) {
+      $('#new_giver_div_5').html($(data).find('#new_giver_div_5'))
+      $('#add_giver_button').attr('id', '#add_giver_button_5')
+    })
   })
 </script>
