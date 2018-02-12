@@ -108,6 +108,10 @@
       $('#error_div').html("")
       $('#break_div').html("")
       $('#js-gift-form-div').html("")
+      $('#new_giver_div_2').html("")
+      $('#new_giver_div_3').html("")
+      $('#new_giver_div_4').html("")
+      $('#new_giver_div_5').html("")
     })
   })
 </script>
@@ -345,18 +349,20 @@
     $.get('/events/<%= @event.id %>/gifts/new', function(data) {
       $('#new_giver_div_2').html($(data).find('#new_giver_div_2'))
       $('#add_giver_button').attr('id', 'add_giver_button_2')
+      $('#minus_sign').attr('id', 'minus_sign_2')
     })
   })
 </script>
 
 <script>
-$(document).on('click', '#add_giver_button_2', function(event) {
-  event.preventDefault()
-  $.get('/events/<%= @event.id %>/gifts/new', function(data) {
-    $('#new_giver_div_3').html($(data).find('#new_giver_div_3'))
-    $('#add_giver_button_2').attr('id', 'add_giver_button_3')
+  $(document).on('click', '#add_giver_button_2', function(event) {
+    event.preventDefault()
+    $.get('/events/<%= @event.id %>/gifts/new', function(data) {
+      $('#new_giver_div_3').html($(data).find('#new_giver_div_3'))
+      $('#add_giver_button_2').attr('id', 'add_giver_button_3')
+      $('#minus_sign_2').attr('id', 'minus_sign_3')
+    })
   })
-})
 </script>
 
 <script>
@@ -365,6 +371,7 @@ $(document).on('click', '#add_giver_button_2', function(event) {
     $.get('/events/<%= @event.id %>/gifts/new', function(data) {
       $('#new_giver_div_4').html($(data).find('#new_giver_div_4'))
       $('#add_giver_button_3').attr('id', 'add_giver_button_4')
+      $('#minus_sign_3').attr('id', 'minus_sign_4')
     })
   })
 </script>
@@ -374,7 +381,48 @@ $(document).on('click', '#add_giver_button_2', function(event) {
     event.preventDefault()
     $.get('/events/<%= @event.id %>/gifts/new', function(data) {
       $('#new_giver_div_5').html($(data).find('#new_giver_div_5'))
-      $('#add_giver_button_4').attr('id', 'add_giver_button_5')
+      $('#add_giver_button_4').attr('disabled', 'disabled')
+      $('#add_giver_button_4').attr('src', '/assets/grey-Plus-Sign.png')
+      $('#minus_sign_4').attr('id', 'minus_sign_5')
     })
+  })
+</script>
+
+<!--remove giver buttons-->
+<script>
+  $(document).on('click', '#minus_sign_2', function(event) {
+    event.preventDefault()
+    $('#new_giver_div_2').html("")
+    $('#add_giver_button_2').attr('id', 'add_giver_button')
+    $('#minus_sign_2').attr('id', 'minus_sign')
+  })
+</script>
+
+<script>
+  $(document).on('click', '#minus_sign_3', function(event) {
+    event.preventDefault()
+    $('#new_giver_div_3').html("")
+    $('#add_giver_button_3').attr('id', 'add_giver_button_2')
+    $('#minus_sign_3').attr('id', 'minus_sign_2')
+  })
+</script>
+
+<script>
+  $(document).on('click', '#minus_sign_4', function(event) {
+    event.preventDefault()
+    $('#new_giver_div_4').html("")
+    $('#add_giver_button_4').attr('id', 'add_giver_button_3')
+    $('#minus_sign_4').attr('id', 'minus_sign_3')
+  })
+</script>
+
+<script>
+  $(document).on('click', '#minus_sign_5', function(event) {
+    event.preventDefault()
+    $('#new_giver_div_5').html("")
+    $('#add_giver_button_5').attr('id', 'add_giver_button_4')
+    $('#minus_sign_5').attr('id', 'minus_sign_4')
+    $('#add_giver_button_4').attr('src', '/assets/plus-sign.png')
+    $('#add_giver_button_4').removeAttr('disabled')
   })
 </script>

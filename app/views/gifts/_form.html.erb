@@ -25,9 +25,9 @@
       <% end %><br></div>
     <% end %>
     <% if @givers.empty? %>
-      <h3 id="add_giver_h3">Add New Gift Giver(s)</h3> <button id="add_giver_button">Add Giver</button>
+      <h3 id="add_giver_h3">Add New Gift Giver(s)</h3> <%= image_submit_tag("plus-sign.png", id: 'add_giver_button', class: 'add_giver_button') %> <%= image_submit_tag("red-minus-sign-icon_281560.png", id: 'minus_sign', class: 'minus_sign') %>
     <% else %>
-      <h3 id="add_giver_h3">Or Add New Gift Giver(s)</h3> <button id="add_giver_button">Add Giver</button>
+      <h3 id="add_giver_h3">Or Add New Gift Giver(s)</h3> <%= image_submit_tag("plus-sign.png", id: 'add_giver_button', class: 'add_giver_button') %> <%= image_submit_tag("red-minus-sign-icon_281560.png", id: 'minus_sign', class: 'minus_sign') %>
     <% end %>
     <div class='new_giver_div' id="new_giver_div_1">
       <%= f.fields_for :givers, gift.givers.build, style: 'display:none' do |givers_fields| %>
@@ -36,7 +36,7 @@
     </div>
     <div class='new_giver_div' id="new_giver_div_2">
       <%= f.fields_for :givers, gift.givers.build do |givers_fields| %>
-        <%= givers_fields.text_field :name, class: 'new_givers', id: 'new_giver_2' %><br>
+        <%= givers_fields.text_field :name, class: 'new_givers', id: 'new_giver_2' %> <br>
       <% end %>
     </div>
     <div class='new_giver_div' id="new_giver_div_3">

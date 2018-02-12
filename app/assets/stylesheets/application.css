@@ -72,6 +72,36 @@ input[type=checkbox] {
 
 .new_givers {
   margin-bottom: 5px;
+  display: inline-block;
+}
+
+.minus_sign {
+  margin-top: 2px;
+  height: 20px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+
+#add_giver_button {
+  margin-top: 2px;
+  height: 20px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 2px;
+}
+
+.add_giver_button {
+  margin-top: 2px;
+  height: 20px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 2px;
 }
 
 #name_h3 {
@@ -98,6 +128,8 @@ input[type=checkbox] {
 
 #add_giver_button {
   display: inline-block;
+  height: 20px;
+  width: auto
 }
 
 button {
