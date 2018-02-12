@@ -79,6 +79,10 @@
         $('#error_div').html($(data).filter('#error_explanation'))
         $('#js-gift-form-div').html($(data).filter('#js-new-gift-form'))
         $('#name_h3').html("Name")
+        $('#new_giver_div_2').html("")
+        $('#new_giver_div_3').html("")
+        $('#new_giver_div_4').html("")
+        $('#new_giver_div_5').html("")
       }
       if (typeof data === "object") {
 
@@ -148,6 +152,10 @@
           $('#gift-element-' + id).html(data2)
           $('#error_div_' + id).html($(data).filter('#error_explanation'))
           $('#break_div_' + id).html('<br>')
+          $('#new_giver_div_2').html("")
+          $('#new_giver_div_3').html("")
+          $('#new_giver_div_4').html("")
+          $('#new_giver_div_5').html("")
         })
       }
       if (typeof data === "object") {
