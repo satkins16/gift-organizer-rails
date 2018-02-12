@@ -20,5 +20,7 @@ X-In events show, after submitting an edit gift, changing givers and submitting 
 -First Edit Gift should be justified left
 X-After Create Gift, first new giver is redirecting to JSON
 X-Hover not working after submit
--Add multiple givers
--Prevent Multiple same givers
+X-Add multiple givers
+X-Prevent Multiple same givers
+  -Regardless of capital letters
+  -Add giver name to error
