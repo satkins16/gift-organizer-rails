@@ -3,7 +3,7 @@ class Giver < ApplicationRecord
   has_many :gift_givers
   has_many :gifts, through: :gift_givers
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   def gift_quantity
     self.gifts.count

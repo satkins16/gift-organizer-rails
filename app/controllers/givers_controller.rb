@@ -7,6 +7,9 @@ class GiversController < ApplicationController
 
   def show
     @giver = Giver.find(params[:id])
+    if @giver.user != current_user
+      redirect_to givers_path
+    end
   end
 
   def edit

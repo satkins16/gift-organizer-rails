@@ -22,6 +22,9 @@ class EventsController < ApplicationController
 
   def show
     @event = current_event
+    if @event.user != current_user
+      redirect_to events_path
+    end
   end
 
   def edit

@@ -22,5 +22,5 @@ X-After Create Gift, first new giver is redirecting to JSON
 X-Hover not working after submit
 X-Add multiple givers
 X-Prevent Multiple same givers
-  -Regardless of capital letters
+  X-Regardless of capital letters
   -Add giver name to error
