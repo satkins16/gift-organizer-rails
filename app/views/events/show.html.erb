@@ -83,12 +83,14 @@
         $('#new_giver_div_3').html("")
         $('#new_giver_div_4').html("")
         $('#new_giver_div_5').html("")
-        var index = this.data.lastIndexOf("=")
-        var name = this.data.substring(index+1)
-        $("#error_explanation").children("ul").html("Giver name: '" + name + "' has already been taken.")
+        var div = $("#error_explanation").html()
+        if (div.includes("Giver")) {
+          var index = this.data.lastIndexOf("=")
+          var name = this.data.substring(index+1)
+          $("#error_explanation").children("ul").children("li:contains('Giver')").html("Giver name: '" + name + "' has already been taken.")
+        }
       }
       if (typeof data === "object") {
-
         $('#error_div').html("")
         $.get('/events/<%= @event.id %>', function(data) {
           $('#break_div').html("")
@@ -150,6 +152,8 @@
     var values = $(".edit_gift", this).serialize();
     var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
     posting.done(function(data) {
+      var index = this.data.lastIndexOf("=")
+      var name = this.data.substring(index+1)
       if (typeof data === "string") {
         $.get('/events/<%= @event.id %>/gifts/' + id + '/edit', function(data2) {
           $('#gift-element-' + id).html(data2)
@@ -159,9 +163,10 @@
           $('#new_giver_div_3').html("")
           $('#new_giver_div_4').html("")
           $('#new_giver_div_5').html("")
-          var index = this.data.lastIndexOf("=")
-          var name = this.data.substring(index+1)
-          $("#error_explanation").children("ul").html("Giver name: '" + name + "' has already been taken.")
+          var div = $("#error_explanation").html()
+          if (div.includes("Giver")) {
+            $("#error_explanation").children("ul").children("li:contains('Giver')").html("Giver name: '" + name + "' has already been taken.")
+          }
         })
       }
       if (typeof data === "object") {

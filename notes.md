@@ -23,4 +23,4 @@ X-Hover not working after submit
 X-Add multiple givers
 X-Prevent Multiple same givers
   X-Regardless of capital letters
-  -Add giver name to error
+  X-Add giver name to error
