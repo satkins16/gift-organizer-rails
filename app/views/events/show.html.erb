@@ -83,6 +83,9 @@
         $('#new_giver_div_3').html("")
         $('#new_giver_div_4').html("")
         $('#new_giver_div_5').html("")
+        var index = this.data.lastIndexOf("=")
+        var name = this.data.substring(index+1)
+        $("#error_explanation").children("ul").html("Giver name: " + name + " has already been taken.")
       }
       if (typeof data === "object") {
 
