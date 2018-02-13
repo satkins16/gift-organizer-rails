@@ -74,7 +74,6 @@
     var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
 
     posting.done(function(data) {
-
       if (typeof data === "string") {
         $('#error_div').html($(data).filter('#error_explanation'))
         $('#js-gift-form-div').html($(data).filter('#js-new-gift-form'))
@@ -85,8 +84,9 @@
         $('#new_giver_div_5').html("")
         var div = $("#error_explanation").html()
         if (div.includes("Giver")) {
-          var index = this.data.lastIndexOf("=")
-          var name = this.data.substring(index+1)
+          var index = this.data.lastIndexOf("name%5D=")
+          var name = this.data.substring(index+8)
+          debugger
           $("#error_explanation").children("ul").children("li:contains('Giver')").html("Giver name: '" + name + "' has already been taken.")
         }
       }
@@ -153,7 +153,7 @@
     var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
     posting.done(function(data) {
       var index = this.data.lastIndexOf("=")
-      var name = this.data.substring(index+1)
+      var name = this.data.substring(index+8)
       if (typeof data === "string") {
         $.get('/events/<%= @event.id %>/gifts/' + id + '/edit', function(data2) {
           $('#gift-element-' + id).html(data2)
