@@ -82,13 +82,6 @@
         $('#new_giver_div_3').html("")
         $('#new_giver_div_4').html("")
         $('#new_giver_div_5').html("")
-        var div = $("#error_explanation").html()
-        if (div.includes("Giver")) {
-          var index = this.data.lastIndexOf("name%5D=")
-          var name = this.data.substring(index+8)
-          debugger
-          $("#error_explanation").children("ul").children("li:contains('Giver')").html("Giver name: '" + name + "' has already been taken.")
-        }
       }
       if (typeof data === "object") {
         $('#error_div').html("")
@@ -163,10 +156,6 @@
           $('#new_giver_div_3').html("")
           $('#new_giver_div_4').html("")
           $('#new_giver_div_5').html("")
-          var div = $("#error_explanation").html()
-          if (div.includes("Giver")) {
-            $("#error_explanation").children("ul").children("li:contains('Giver')").html("Giver name: '" + name + "' has already been taken.")
-          }
         })
       }
       if (typeof data === "object") {

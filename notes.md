@@ -17,10 +17,9 @@ X-Gift form margins
 X-Name h3 being removed from new gift form
 X-Thank you checklist
 X-In events show, after submitting an edit gift, changing givers and submitting again redirects to json view
--First Edit Gift should be justified left
 X-After Create Gift, first new giver is redirecting to JSON
 X-Hover not working after submit
 X-Add multiple givers
 X-Prevent Multiple same givers
   X-Regardless of capital letters
-  X-Add giver name to error
+  -Add giver name to error
