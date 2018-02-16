@@ -22,7 +22,10 @@ class GiftsController < ApplicationController
           current_user.givers << giver
         end
       end
-
+      @gift.givers.each do |giver|
+        giver.user = current_user
+        giver.save
+      end
       render json: @gift, status: 201
     else
       @event = current_gift_event
@@ -40,6 +43,13 @@ class GiftsController < ApplicationController
   def update
     @gift = Gift.find(params[:id])
     if @gift.update(gift_params)
+
+      @gift.givers.each do |giver|
+        if giver.user = nil
+          giver.user = current_user
+          giver.save
+        end
+      end
 
       render json: @gift, status: 201
     else
