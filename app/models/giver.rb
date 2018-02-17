@@ -13,7 +13,7 @@ class Giver < ApplicationRecord
   private
 
   def name_scope
-    if self.id != nil
+    if self.id == nil
       User.current.givers.each do |giver|
         if giver.name.downcase == self.name.downcase
           errors.add(:name, ": #{self.name} has already been taken.")
