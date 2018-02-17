@@ -10,10 +10,14 @@ class Giver < ApplicationRecord
     self.gifts.count
   end
 
+  private
+
   def name_scope
-    User.current.givers.each do |giver|
-      if giver.name == self.name
-        errors.add(:name, ": #{self.name} has already been taken.")
+    if self.id != nil
+      User.current.givers.each do |giver|
+        if giver.name.downcase == self.name.downcase
+          errors.add(:name, ": #{self.name} has already been taken.")
+        end
       end
     end
   end

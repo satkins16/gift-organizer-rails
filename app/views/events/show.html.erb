@@ -357,6 +357,7 @@
     $.get('/events/<%= @event.id %>/gifts/new', function(data) {
       $('#new_giver_div_2').html($(data).find('#new_giver_div_2'))
       $('#add_giver_button').attr('id', 'add_giver_button_2')
+      $('#minus_sign').removeAttr('disabled')
       $('#minus_sign').attr('id', 'minus_sign_2')
     })
   })
@@ -403,6 +404,7 @@
     $('#new_giver_div_2').html("")
     $('#add_giver_button_2').attr('id', 'add_giver_button')
     $('#minus_sign_2').attr('id', 'minus_sign')
+    $('#minus_sign').attr('disabled', 'disabled')
   })
 </script>
 
