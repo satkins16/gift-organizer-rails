@@ -17,11 +17,6 @@ class GiftsController < ApplicationController
       @gift.save
       current_gift_event.gifts << @gift
       current_gift_event.save
-      current_user.givers.each do |giver|
-        if params[:gift][:giver_ids].include? giver.id.to_s
-          current_user.givers << giver
-        end
-      end
       @gift.givers.each do |giver|
         giver.user = current_user
         giver.save
