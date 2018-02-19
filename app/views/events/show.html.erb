@@ -51,7 +51,7 @@
     var key = event.which;
     if (key == 13) {
       event.preventDefault()
-      $('#js-gift-form-div').submit();
+      $(this.forms).find(':submit').click();
     }
   });
 </script>
@@ -87,7 +87,7 @@
 
 <!--submit new gift-->
 <script>
-  $('#js-gift-form-div').submit(function(event) {
+  $('#js-gift-form-div').on('submit', function(event) {
     event.preventDefault();
 
     var values = $("#new_gift", this).serialize();
