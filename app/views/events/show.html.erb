@@ -253,12 +253,8 @@
 <script>
   $(document).on({
     mouseenter: function () {
+      $(this).html("UNTHANK?")
       $(this).attr("class", "thank_hover");
-      if ($(this).html() === "NOT THANKED") {
-        $(this).html("THANK?")
-      } else {
-        $(this).html("UNTHANK?")
-      }
     },
   }, '.thanked_div');
 </script>
@@ -267,12 +263,8 @@
 <script>
   $(document).on({
     mouseenter: function () {
+      $(this).html("THANK?")
       $(this).attr("class", "thank_hover");
-      if ($(this).html() === "NOT THANKED") {
-        $(this).html("THANK?")
-      } else {
-        $(this).html("UNTHANK?")
-      }
     },
   }, '.not_thanked_div');
 </script>
@@ -284,10 +276,7 @@
       if ($(this).html() === "THANK?") {
         $(this).attr("class", "not_thanked_div");
         $(this).html("NOT THANKED")
-      } else if ($(this).html() === "NOT THANKED") {
-        $(this).attr("class", "not_thanked_div");
-        $(this).html("NOT THANKED")
-      } else {
+      } else if ($(this).html() === "UNTHANK?") {
         $(this).attr("class", "thanked_div");
         $(this).html("THANKED")
       }
@@ -297,22 +286,6 @@
 
 <!--thank click-->
 <script>
-  $(document).on('click', '.thanked_div', function(event) {
-    event.preventDefault()
-    var id = $(this).data("id")
-    $.get('/gifts/' + id + '/thank', function() {
-    })
-    if ($(this).html() === "THANK?") {
-      $(this).attr('class', 'thanked_div')
-      $(this).html("THANKED")
-    } else {
-      $(this).html("NOT THANKED")
-      $(this).attr('class', 'not_thanked_div')
-    }
-  })
-</script>
-
-<script>
   $(document).on('click', '.thank_hover', function(event) {
     event.preventDefault()
     var id = $(this).data("id")
@@ -321,23 +294,7 @@
     if ($(this).html() === "THANK?") {
       $(this).attr('class', 'thanked_div')
       $(this).html("THANKED")
-    } else {
-      $(this).html("NOT THANKED")
-      $(this).attr('class', 'not_thanked_div')
-    }
-  })
-</script>
-
-<!--not thanked click-->
-<script>
-  $(document).on('click', '.not_thanked_div', function(event) {
-    event.preventDefault()
-    var id = $(this).data("id")
-    $.get('/gifts/' + id + '/thank', function() {
-    })
-    if ($(this).html() === "THANK?") {
-      $(this).attr('class', 'thanked_div')
-    } else {
+    } else if ($(this).html() === "UNTHANK?") {
       $(this).html("NOT THANKED")
       $(this).attr('class', 'not_thanked_div')
     }
