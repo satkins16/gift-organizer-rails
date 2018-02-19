@@ -35,15 +35,7 @@
 </div>
 
 <!--document ready css-->
-<script>
-  $(document).ready(function() {
-    if ($('.thanked_div').html() === "THANKED") {
-      $('.thanked_div').css("background-color", "#3FFE7C")
-    } else if ($('.thanked_div').html() === "NOT THANKED") {
-      $('.thanked_div').css("background-color", "#ff4d4d")
-    }
-  })
-</script>
+
 
 <!--submit gift forms with enter key-->
 <script>
@@ -257,70 +249,50 @@
   })
 </script>
 
-<!--thank hover-->
+<!--thank hover in-->
 <script>
   $(document).on({
-      mouseenter: function () {
-        $(this).css("background-color", "black");
-        $(this).css("color", "white")
-        if ($(this).html() === "NOT THANKED") {
-          $(this).html("THANK?")
-        } else {
-          $(this).html("UNTHANK?")
-        }
-      },
-      mouseleave: function () {
-        if ($(this).html() === "THANK?") {
-          $(this).css("background-color", "#ff4d4d");
-          $(this).css("font-weight", "bold")
-          $(this).css("color", "black")
-          $(this).html("NOT THANKED")
-        } else if ($(this).html() === "NOT THANKED") {
-          $(this).css("background-color", "#ff4d4d");
-          $(this).css("font-weight", "bold")
-          $(this).css("color", "black")
-          $(this).html("NOT THANKED")
-        } else {
-          $(this).css("background-color", "#3FFE7C");
-          $(this).css("font-weight", "bold")
-          $(this).css("color", "black")
-          $(this).html("THANKED")
-        }
+    mouseenter: function () {
+      $(this).attr("class", "thank_hover");
+      if ($(this).html() === "NOT THANKED") {
+        $(this).html("THANK?")
+      } else {
+        $(this).html("UNTHANK?")
       }
+    },
   }, '.thanked_div');
 </script>
 
-<!--not thanked hover-->
+<!--not thanked hover in-->
 <script>
   $(document).on({
-      mouseenter: function () {
-        $(this).css("background-color", "black");
-        $(this).css("color", "white")
-        if ($(this).html() === "NOT THANKED") {
-          $(this).html("THANK?")
-        } else {
-          $(this).html("UNTHANK?")
-        }
-      },
-      mouseleave: function () {
-        if ($(this).html() === "THANK?") {
-          $(this).css("background-color", "#ff4d4d");
-          $(this).css("font-weight", "bold")
-          $(this).css("color", "black")
-          $(this).html("NOT THANKED")
-        } else if ($(this).html() === "NOT THANKED") {
-          $(this).css("background-color", "#ff4d4d");
-          $(this).css("font-weight", "bold")
-          $(this).css("color", "black")
-          $(this).html("NOT THANKED")
-        } else {
-          $(this).css("background-color", "#3FFE7C");
-          $(this).css("font-weight", "bold")
-          $(this).css("color", "black")
-          $(this).html("THANKED")
-        }
+    mouseenter: function () {
+      $(this).attr("class", "thank_hover");
+      if ($(this).html() === "NOT THANKED") {
+        $(this).html("THANK?")
+      } else {
+        $(this).html("UNTHANK?")
       }
+    },
   }, '.not_thanked_div');
+</script>
+
+<!--hover out-->
+<script>
+  $(document).on({
+    mouseleave: function () {
+      if ($(this).html() === "THANK?") {
+        $(this).attr("class", "not_thanked_div");
+        $(this).html("NOT THANKED")
+      } else if ($(this).html() === "NOT THANKED") {
+        $(this).attr("class", "not_thanked_div");
+        $(this).html("NOT THANKED")
+      } else {
+        $(this).attr("class", "thanked_div");
+        $(this).html("THANKED")
+      }
+    }
+  }, '.thank_hover');
 </script>
 
 <!--thank click-->
@@ -331,13 +303,27 @@
     $.get('/gifts/' + id + '/thank', function() {
     })
     if ($(this).html() === "THANK?") {
+      $(this).attr('class', 'thanked_div')
       $(this).html("THANKED")
-      $(this).css("background-color", "#3FFE7C")
-      $(this).css("color", "black")
     } else {
       $(this).html("NOT THANKED")
-      $(this).css("background-color", "#ff4d4d");
-      $(this).css("color", "black")
+      $(this).attr('class', 'not_thanked_div')
+    }
+  })
+</script>
+
+<script>
+  $(document).on('click', '.thank_hover', function(event) {
+    event.preventDefault()
+    var id = $(this).data("id")
+    $.get('/gifts/' + id + '/thank', function() {
+    })
+    if ($(this).html() === "THANK?") {
+      $(this).attr('class', 'thanked_div')
+      $(this).html("THANKED")
+    } else {
+      $(this).html("NOT THANKED")
+      $(this).attr('class', 'not_thanked_div')
     }
   })
 </script>
@@ -350,23 +336,10 @@
     $.get('/gifts/' + id + '/thank', function() {
     })
     if ($(this).html() === "THANK?") {
-      $(this).html("THANKED")
-      $(this).css("background-color", "#3FFE7C")
-      $(this).css("color", "black")
-      $(this).on('mouseout', function() {
-        $(this).html("THANKED")
-        $(this).css("background-color", "#3FFE7C")
-        $(this).css("color", "black")
-      })
+      $(this).attr('class', 'thanked_div')
     } else {
       $(this).html("NOT THANKED")
-      $(this).css("background-color", "#ff4d4d");
-      $(this).css("color", "black")
-      $(this).on('mouseout', function() {
-        $(this).html("NOT THANKED")
-        $(this).css("background-color", "#ff4d4d");
-        $(this).css("color", "black")
-      })
+      $(this).attr('class', 'not_thanked_div')
     }
   })
 </script>
