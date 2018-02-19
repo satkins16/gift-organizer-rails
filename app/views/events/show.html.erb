@@ -45,6 +45,27 @@
   })
 </script>
 
+<!--submit gift forms with enter key-->
+<script>
+  $('#js-gift-form-div').keydown(function(event) {
+    var key = event.which;
+    if (key == 13) {
+      event.preventDefault()
+      $('#js-gift-form-div').submit();
+    }
+  });
+</script>
+
+<script>
+  $(document).keydown('.gift-div', function(event) {
+    var key = event.which;
+    if (key == 13) {
+      event.preventDefault()
+      $(this.forms).find(':submit').click();
+    }
+  });
+</script>
+
 <!--load new gift form-->
 <script>
   $('#js-new-gift-button').on("click", function(event) {
