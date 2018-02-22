@@ -79,14 +79,24 @@
 
 <!--submit new gift-->
 <script>
+  function Gift (name, givers) {
+    this.name = name
+    this.givers = givers
+  }
+
+  //Gift.prototype.function =
+  // let gift1 = new Gift(name, givers)
+  // gift1.html()
+
   $('#js-gift-form-div').on('submit', function(event) {
     event.preventDefault();
 
-    var values = $("#new_gift", this).serialize();
+    const values = $("#new_gift", this).serialize();
 
-    var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
+    const posting = $.post(`/events/<%= @event.id %>/gifts`, values);
 
-    posting.done(function(data) {
+    posting.done(data => {
+      // this = submit
       if (typeof data === "string") {
         $('#error_div').html($(data).filter('#error_explanation'))
         $('#js-gift-form-div').html($(data).filter('#js-new-gift-form'))
@@ -98,16 +108,24 @@
       }
       if (typeof data === "object") {
         $('#error_div').html("")
+
         $.get('/events/<%= @event.id %>', function(data) {
           $('#break_div').html("")
           $('#giftList').html($(data).filter('#giftList'))
+          // data giftlist => class or constructor function
+          // go through the data and sort
+          // append sorted data to the page using new Object
+          debugger
+          new Gift()
           $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
           $("js-gift-form-div").html("")
         })
       }
     })
   });
+
 </script>
+
 
 <!--load edit gift form-->
 <script>

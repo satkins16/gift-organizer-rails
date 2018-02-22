@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
+  def show #=> url-here/1,json
     @event = current_event
     if @event.user != current_user
       redirect_to events_path
