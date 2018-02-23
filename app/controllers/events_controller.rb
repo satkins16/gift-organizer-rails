@@ -27,6 +27,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def gifts_json
+    event = Event.find(params[:id])
+    gifts = event.gifts
+    render json: GiftSerializer.serialize(gifts)
+  end
+
   def edit
     @event = current_event
   end

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/gifts/:id/thank', to: 'gifts#thank'
 
+  get 'events/:id/gifts_json', to: 'events#gifts_json'
+
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

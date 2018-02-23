@@ -109,14 +109,14 @@
       if (typeof data === "object") {
         $('#error_div').html("")
 
-        $.get('/events/<%= @event.id %>', function(data) {
+        $.get('/events/<%= @event.id %>/gifts_json', function(gifts) {
+          
           $('#break_div').html("")
           $('#giftList').html($(data).filter('#giftList'))
           // data giftlist => class or constructor function
           // go through the data and sort
           // append sorted data to the page using new Object
-          debugger
-          new Gift()
+
           $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
           $("js-gift-form-div").html("")
         })
