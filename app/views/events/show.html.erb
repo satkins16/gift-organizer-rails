@@ -25,9 +25,11 @@
             <%= button_tag "NOT THANKED", data: {id: gift.id}, class: "not_thanked_div", id: `thanked_#{gift.id}` %>
           <% end %>
           <div id='gift_name_<%= gift_counter %>', class="gift_name"><%= gift.name %></div> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
+          <% giver_counter = 0 %>
           <% gift.givers.each do |giver| %>
+            <% giver_counter += 1 %>
             <ul class="bullet_list">
-              <li><%= link_to giver.name, giver_path(giver) %></li>
+              <li id="gift_<%= gift_counter %>_giver_<%= giver_counter %>", class="giver_name"><a href="/givers/<%= giver.id %>"><%= giver.name %></a></li>
             </ul>
           <% end %>
         </div>
@@ -100,6 +102,10 @@
     appendGiftName(div_num) {
       $("#gift_name_" + div_num).html(this.name)
     }
+
+    appendGivers(gift_num, giv_num, giver) {
+      $("#gift_" + gift_num + "_giver_" + giv_num + " a").text(giver.name)
+    }
   }
 
   //Gift.prototype.function =
@@ -139,13 +145,26 @@
 
           $('.gift_name').html("")
 
-          let counter = 0
+          let gift_counter = 0
 
           sortedGifts.forEach(function(g) {
-            counter += 1
+            gift_counter += 1
             let gift = new Gift(g.id, g.name, g.givers)
-            debugger
-            gift.appendGiftName(counter)
+
+            gift.appendGiftName(gift_counter)
+
+            const sortedGivers = gift.givers.sort( function( a, b ) {
+                a = a.name.toLowerCase();
+                b = b.name.toLowerCase();
+
+                return a < b ? -1 : a > b ? 1 : 0;
+            });
+
+            let giver_counter = 0
+            sortedGivers.forEach(function(giv) {
+              giver_counter += 1
+              gift.appendGivers(gift_counter, giver_counter, giv)
+            })
 
 
           })
