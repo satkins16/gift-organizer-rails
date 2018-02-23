@@ -15,6 +15,10 @@
  */
 body {background-color: lightskyblue;}
 
+.gift_name {
+  display: inline-block;
+}
+
 .thanked_div {
   border: 0;
   background-color: #3FFE7C;

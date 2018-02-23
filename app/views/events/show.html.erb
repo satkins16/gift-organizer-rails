@@ -12,7 +12,9 @@
 
 <div id="giftList">
   <ul class="no_bullet_list">
+    <% gift_counter = 0 %>
     <% @event.gifts.sort_by(&:name).each do |gift| %>
+      <% gift_counter += 1 %>
       <li class="no_button_list">
         <div id="error_div_<%= gift.id %>"></div>
         <div id="break_div_<%= gift.id %>"></div>
@@ -22,7 +24,7 @@
           <% elsif gift.thanked == 0 %>
             <%= button_tag "NOT THANKED", data: {id: gift.id}, class: "not_thanked_div", id: `thanked_#{gift.id}` %>
           <% end %>
-          <%= gift.name %> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
+          <div id='gift_name_<%= gift_counter %>', class="gift_name"><%= gift.name %></div> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
           <% gift.givers.each do |giver| %>
             <ul class="bullet_list">
               <li><%= link_to giver.name, giver_path(giver) %></li>
@@ -95,8 +97,8 @@
       });
     }
 
-    appendGift() {
-
+    appendGiftName(div_num) {
+      $("#gift_name_" + div_num).html(this.name)
     }
   }
 
@@ -135,18 +137,25 @@
               return a < b ? -1 : a > b ? 1 : 0;
           });
 
+          $('.gift_name').html("")
+
+          let counter = 0
+
           sortedGifts.forEach(function(g) {
+            counter += 1
             let gift = new Gift(g.id, g.name, g.givers)
-            
             debugger
+            gift.appendGiftName(counter)
+
+
           })
           $('#break_div').html("")
-          $('#giftList').html($(data).filter('#giftList'))
+          //$('#giftList').html($(data).filter('#giftList'))
           // data giftlist => class or constructor function
           // go through the data and sort
           // append sorted data to the page using new Object
 
-          $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+          //$('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
           $("js-gift-form-div").html("")
         })
       }
