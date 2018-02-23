@@ -79,9 +79,25 @@
 
 <!--submit new gift-->
 <script>
-  function Gift (name, givers) {
-    this.name = name
-    this.givers = givers
+  class Gift {
+    constructor(id, name, givers) {
+      this.id = id;
+      this.name = name;
+      this.givers = givers;
+    }
+
+    sortGivers() {
+      this.givers.sort( function( a, b ) {
+          a = a.city.toLowerCase();
+          b = b.city.toLowerCase();
+
+          return a < b ? -1 : a > b ? 1 : 0;
+      });
+    }
+
+    appendGift() {
+
+    }
   }
 
   //Gift.prototype.function =
@@ -110,7 +126,20 @@
         $('#error_div').html("")
 
         $.get('/events/<%= @event.id %>.json', function(gifts) {
-          debugger
+
+
+          const sortedGifts = gifts.sort( function( a, b ) {
+              a = a.name.toLowerCase();
+              b = b.name.toLowerCase();
+
+              return a < b ? -1 : a > b ? 1 : 0;
+          });
+
+          sortedGifts.forEach(function(g) {
+            let gift = new Gift(g.id, g.name, g.givers)
+            
+            debugger
+          })
           $('#break_div').html("")
           $('#giftList').html($(data).filter('#giftList'))
           // data giftlist => class or constructor function

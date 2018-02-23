@@ -28,7 +28,7 @@ class EventsController < ApplicationController
     end
     respond_to do |format|
       format.html {render :show}
-      format.json { render json: @gifts.to_json(only: [:name, :id], include: [givers: { only: [:name]}]) }
+      format.json { render json: @gifts.to_json(only: [:name, :id], include: [givers: { only: [:id, :name]}]) }
     end
   end
 
