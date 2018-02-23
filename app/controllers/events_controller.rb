@@ -22,8 +22,13 @@ class EventsController < ApplicationController
 
   def show #=> url-here/1,json
     @event = current_event
+    @gifts = @event.gifts
     if @event.user != current_user
       redirect_to events_path
+    end
+    respond_to do |format|
+      format.html {render :show}
+      format.json { render json: @gifts.to_json(only: [:name, :id], include: [givers: { only: [:name]}]) }
     end
   end
 

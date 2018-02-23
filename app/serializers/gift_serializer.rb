@@ -34,7 +34,7 @@ class GiftSerializer
       end
 
     end
-    binding.pry
+  
   end
 
 end

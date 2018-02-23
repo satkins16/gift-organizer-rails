@@ -109,8 +109,8 @@
       if (typeof data === "object") {
         $('#error_div').html("")
 
-        $.get('/events/<%= @event.id %>/gifts_json', function(gifts) {
-          
+        $.get('/events/<%= @event.id %>.json', function(gifts) {
+          debugger
           $('#break_div').html("")
           $('#giftList').html($(data).filter('#giftList'))
           // data giftlist => class or constructor function
