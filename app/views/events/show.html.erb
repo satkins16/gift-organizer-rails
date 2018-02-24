@@ -12,9 +12,7 @@
 
 <div id="giftList">
   <ul class="no_bullet_list">
-    <% gift_counter = 0 %>
     <% @event.gifts.sort_by(&:name).each do |gift| %>
-      <% gift_counter += 1 %>
       <li class="no_button_list">
         <div id="error_div_<%= gift.id %>"></div>
         <div id="break_div_<%= gift.id %>"></div>
@@ -24,12 +22,10 @@
           <% elsif gift.thanked == 0 %>
             <%= button_tag "NOT THANKED", data: {id: gift.id}, class: "not_thanked_div", id: `thanked_#{gift.id}` %>
           <% end %>
-          <div id='gift_name_<%= gift_counter %>', class="gift_name"><%= gift.name %></div> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
-          <% giver_counter = 0 %>
-          <% gift.givers.each do |giver| %>
-            <% giver_counter += 1 %>
+          <div id='gift_name_<%= gift.id %>', class="gift_name"><%= gift.name %></div> - <a href="" class="editLink" data-id="<%= gift.id %>">Edit</a> <a href="#" class="removeLink" data-id="<%= gift.id %>">Remove</a>
+          <% gift.givers.sort_by(&:name).each do |giver| %>
             <ul class="bullet_list">
-              <li id="gift_<%= gift_counter %>_giver_<%= giver_counter %>", class="giver_name"><a href="/givers/<%= giver.id %>"><%= giver.name %></a></li>
+              <li id="gift_<%= gift.id %>_giver_<%= giver.id %>", class="giver_name"><a href="/givers/<%= giver.id %>"><%= giver.name %></a></li>
             </ul>
           <% end %>
         </div>
@@ -99,18 +95,14 @@
       });
     }
 
-    appendGiftName(div_num) {
-      $("#gift_name_" + div_num).html(this.name)
+    appendGiftName(gift_id) {
+      $("#gift_name_" + gift_id).html(this.name)
     }
 
-    appendGivers(gift_num, giv_num, giver) {
-      $("#gift_" + gift_num + "_giver_" + giv_num + " a").text(giver.name)
+    appendGivers(gift_id, giv_id, giver) {
+      $("#gift_" + gift_id + "_giver_" + giv_id + " a").text(giver.name)
     }
   }
-
-  //Gift.prototype.function =
-  // let gift1 = new Gift(name, givers)
-  // gift1.html()
 
   $('#js-gift-form-div').on('submit', function(event) {
     event.preventDefault();
@@ -132,9 +124,11 @@
       }
       if (typeof data === "object") {
         $('#error_div').html("")
+        $.get('/events/<%= @event.id %>', function(data) {
+          $('#giftList').html($(data).filter('#giftList'))
+        })
 
         $.get('/events/<%= @event.id %>.json', function(gifts) {
-
 
           const sortedGifts = gifts.sort( function( a, b ) {
               a = a.name.toLowerCase();
@@ -143,15 +137,10 @@
               return a < b ? -1 : a > b ? 1 : 0;
           });
 
-          $('.gift_name').html("")
-
-          let gift_counter = 0
-
           sortedGifts.forEach(function(g) {
-            gift_counter += 1
             let gift = new Gift(g.id, g.name, g.givers)
 
-            gift.appendGiftName(gift_counter)
+            gift.appendGiftName(gift.id)
 
             const sortedGivers = gift.givers.sort( function( a, b ) {
                 a = a.name.toLowerCase();
@@ -159,11 +148,9 @@
 
                 return a < b ? -1 : a > b ? 1 : 0;
             });
-
-            let giver_counter = 0
+  
             sortedGivers.forEach(function(giv) {
-              giver_counter += 1
-              gift.appendGivers(gift_counter, giver_counter, giv)
+              gift.appendGivers(gift.id, giv.id, giv)
             })
 
 
@@ -173,9 +160,8 @@
           // data giftlist => class or constructor function
           // go through the data and sort
           // append sorted data to the page using new Object
-
           //$('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
-          $("js-gift-form-div").html("")
+          $("#js-gift-form-div").html("")
         })
       }
     })
