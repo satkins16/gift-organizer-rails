@@ -148,7 +148,7 @@
 
                 return a < b ? -1 : a > b ? 1 : 0;
             });
-  
+
             sortedGivers.forEach(function(giv) {
               gift.appendGivers(gift.id, giv.id, giv)
             })
@@ -174,7 +174,7 @@
 <script>
   $(document).on("click", '.editLink', function(event) {
     event.preventDefault();
-    var id = $(this).data("id");
+    const id = $(this).data("id");
     $.get('/events/<%= @event.id %>/gifts/' + id + '/edit', function(data) {
       $('#gift-element-' + id).html(data)
       $('#name_h3').html("")
@@ -196,7 +196,7 @@
 <script>
   $(document).on('click', '.gift_form_cancel', function(event) {
     event.preventDefault()
-    var id = this.id
+    const id = this.id
     $.get('/events/<%= @event.id %>', function(data) {
       if ($('#break_div').html() === ('<br>')) {
         $('#break_div').html("")
@@ -215,12 +215,12 @@
 <script>
   $(document).on('submit', '.gift-div', function() {
     event.preventDefault()
-    var id = $(this).data("id");
-    var values = $(".edit_gift", this).serialize();
-    var posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
+    const id = $(this).data("id");
+    const values = $(".edit_gift", this).serialize();
+    const posting = $.post(`/events/<%= @event.id %>/gifts/` + id, values);
     posting.done(function(data) {
-      var index = this.data.lastIndexOf("=")
-      var name = this.data.substring(index+8)
+      const index = this.data.lastIndexOf("=")
+      const name = this.data.substring(index+8)
       if (typeof data === "string") {
         $.get('/events/<%= @event.id %>/gifts/' + id + '/edit', function(data2) {
           $('#gift-element-' + id).html(data2)
@@ -248,8 +248,8 @@
 <script>
   $(document).on("click", '.removeLink', function(event) {
     event.preventDefault()
-    var id = $(this).data("id")
-    var confirmation = confirm("Are you sure you want to delete?")
+    const id = $(this).data("id")
+    const confirmation = confirm("Are you sure you want to delete?")
 
     if (confirmation) {
       $.ajax({
@@ -291,8 +291,8 @@
 <script>
   $('#event_header_div').submit(function() {
     event.preventDefault()
-    var values = $('.edit_event', this).serialize()
-    var posting = $.post(`/events/<%= @event.id %>`, values);
+    const values = $('.edit_event', this).serialize()
+    const posting = $.post(`/events/<%= @event.id %>`, values);
     posting.done(function(data) {
       if (typeof data === "string") {
         $.get('/events/<%= @event.id %>/edit', function(data2) {
@@ -349,7 +349,7 @@
 <script>
   $(document).on('click', '.thank_hover', function(event) {
     event.preventDefault()
-    var id = $(this).data("id")
+    const id = $(this).data("id")
     $.get('/gifts/' + id + '/thank', function() {
     })
     if ($(this).html() === "THANK?") {
