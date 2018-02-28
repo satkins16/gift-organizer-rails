@@ -78,7 +78,18 @@
 </script>
 
 <!--submit new gift-->
+
 <script>
+
+  function sortArray(array) {
+      return array.sort((a, b) => {
+      a = a.name.toLowerCase();
+      b = b.name.toLowerCase();
+
+      return a < b ? -1 : a > b ? 1 : 0;
+    });
+  }
+
   class Gift {
     constructor(id, name, givers) {
       this.id = id;
@@ -95,18 +106,18 @@
       });
     }
 
-    appendGiftName(gift_id) {
-      $("#gift_name_" + gift_id).html(this.name)
+    appendGiftName(giftID) {
+      $("#gift_name_" + giftID).html(this.name)
     }
 
-    appendGivers(gift_id, giv_id, giver) {
-      $("#gift_" + gift_id + "_giver_" + giv_id + " a").text(giver.name)
+    appendGivers(giftID, givID, giver) {
+      $("#gift_" + giftID + "_giver_" + givID + " a").text(giver.name)
     }
   }
 
   $('#js-gift-form-div').on('submit', function(event) {
     event.preventDefault();
-
+    //this => button
     const values = $("#new_gift", this).serialize();
 
     const posting = $.post(`/events/<%= @event.id %>/gifts`, values);
@@ -129,25 +140,14 @@
         })
 
         $.get('/events/<%= @event.id %>.json', function(gifts) {
-
-          const sortedGifts = gifts.sort( function( a, b ) {
-              a = a.name.toLowerCase();
-              b = b.name.toLowerCase();
-
-              return a < b ? -1 : a > b ? 1 : 0;
-          });
+          const sortedGifts = sortArray(gifts)
 
           sortedGifts.forEach(function(g) {
             let gift = new Gift(g.id, g.name, g.givers)
 
             gift.appendGiftName(gift.id)
 
-            const sortedGivers = gift.givers.sort( function( a, b ) {
-                a = a.name.toLowerCase();
-                b = b.name.toLowerCase();
-
-                return a < b ? -1 : a > b ? 1 : 0;
-            });
+            const sortedGivers = sortArray(gift.givers)
 
             sortedGivers.forEach(function(giv) {
               gift.appendGivers(gift.id, giv.id, giv)
