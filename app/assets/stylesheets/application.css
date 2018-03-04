@@ -15,6 +15,14 @@
  */
 body {background-color: lightskyblue;}
 
+a {
+  color: rgb(0,0,255);
+}
+
+a:visited {
+  color: rgb(0,0,255);
+}
+
 .gift_name {
   display: inline-block;
 }
