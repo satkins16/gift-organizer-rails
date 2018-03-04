@@ -80,50 +80,11 @@
 <!--submit new gift-->
 
 <script>
-
-  function sortArray(array) {
-      return array.sort((a, b) => {
-      a = a.name.toLowerCase();
-      b = b.name.toLowerCase();
-
-      return a < b ? -1 : a > b ? 1 : 0;
-    });
-  }
-
-  class Gift {
-    constructor(id, name, givers) {
-      this.id = id;
-      this.name = name;
-      this.givers = givers;
-    }
-
-    sortGivers() {
-      this.givers.sort( function( a, b ) {
-          a = a.city.toLowerCase();
-          b = b.city.toLowerCase();
-
-          return a < b ? -1 : a > b ? 1 : 0;
-      });
-    }
-
-    appendGiftName(giftID) {
-      $("#gift_name_" + giftID).html(this.name)
-    }
-
-    appendGivers(giftID, givID, giver) {
-      $("#gift_" + giftID + "_giver_" + givID + " a").text(giver.name)
-    }
-  }
-
   $('#js-gift-form-div').on('submit', function(event) {
     event.preventDefault();
-    //this => button
-    const values = $("#new_gift", this).serialize();
-
-    const posting = $.post(`/events/<%= @event.id %>/gifts`, values);
-
-    posting.done(data => {
-      // this = submit
+    var values = $("#new_gift", this).serialize();
+    var posting = $.post(`/events/<%= @event.id %>/gifts`, values);
+    posting.done(function(data) {
       if (typeof data === "string") {
         $('#error_div').html($(data).filter('#error_explanation'))
         $('#js-gift-form-div').html($(data).filter('#js-new-gift-form'))
@@ -136,37 +97,14 @@
       if (typeof data === "object") {
         $('#error_div').html("")
         $.get('/events/<%= @event.id %>', function(data) {
-          $('#giftList').html($(data).filter('#giftList'))
-        })
-
-        $.get('/events/<%= @event.id %>.json', function(gifts) {
-          const sortedGifts = sortArray(gifts)
-
-          sortedGifts.forEach(function(g) {
-            let gift = new Gift(g.id, g.name, g.givers)
-
-            gift.appendGiftName(gift.id)
-
-            const sortedGivers = sortArray(gift.givers)
-
-            sortedGivers.forEach(function(giv) {
-              gift.appendGivers(gift.id, giv.id, giv)
-            })
-
-
-          })
           $('#break_div').html("")
-          //$('#giftList').html($(data).filter('#giftList'))
-          // data giftlist => class or constructor function
-          // go through the data and sort
-          // append sorted data to the page using new Object
-          //$('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
-          $("#js-gift-form-div").html("")
+          $('#giftList').html($(data).filter('#giftList'))
+          $('#js-gift-form-div').html($(data).filter('#js-gift-form-div'))
+          $("js-gift-form-div").html("")
         })
       }
     })
   });
-
 </script>
 
 
